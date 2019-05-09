@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+             x:Class="Mobile.Shared.Pages.Controls.Navigation.BarMenu">
+    <!--Style-->
+    <ContentView.Resources>
+        <!--Bar menu-->
+        <Style x:Key="barMenu" TargetType="FlexLayout">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="AlignContent" Value="Center"/>
+            <Setter Property="AlignItems" Value="Center"/>
+            <Setter Property="JustifyContent" Value="SpaceBetween"/>
+        </Style>
+        <!--Icons-->
+        <Style x:Key="barMenuIcon" TargetType="Label">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorSecondary}"/>
+        </Style>
+    </ContentView.Resources>
+    
+   <!--Content-->
+  <ContentView.Content>
+        <FlexLayout Style="{StaticResource barMenu}">
+            <Label x:Name="homeIcon" Text="{x:Static helpers:Icons.home}" FontFamily="{StaticResource Icon}" Margin="20, 0, 0, 0" Style="{StaticResource barMenuIcon}"/>
+            <Label x:Name="currentParametersIcon"  Text="{x:Static helpers:Icons.bar_chart_2}" FontFamily="{StaticResource Icon}" Style="{StaticResource barMenuIcon}"/>
+            <Label x:Name="realtimeVideoIcon" Text="{x:Static helpers:Icons.video}" FontFamily="{StaticResource Icon}" Style="{StaticResource barMenuIcon}"/>
+            <Label x:Name="plantsListIcon" Text="{x:Static helpers:Icons.list}" FontFamily="{StaticResource Icon}" Style="{StaticResource barMenuIcon}"/>
+            <Label x:Name="settignsIcon" Text="{x:Static helpers:Icons.settings}" FontFamily="{StaticResource Icon}" Margin="0, 0, 20, 0" Style="{StaticResource barMenuIcon}"/>
+        </FlexLayout>
+    </ContentView.Content>
+</ContentView>

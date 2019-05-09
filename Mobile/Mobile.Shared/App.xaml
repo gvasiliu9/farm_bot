@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:Xamarin.Forms.Helpers"
+             xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
+             x:Class="Mobile.Shared.App">
+    <Application.Resources>
+        <!--Success button-->
+        <Style x:Key="SuccessButton" TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="130"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="#67a474"/>
+            <Setter Property="BorderRadius" Value="0"/>
+        </Style>
+        
+        <!--Danger button-->
+        <Style x:Key="DangerButton" TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="130"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="#c45a75"/>
+            <Setter Property="BorderRadius" Value="0"/>
+        </Style>
+        
+        <!--Page image-->
+        <Style x:Key="pageImage" TargetType="Image">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="50"/>
+        </Style>
+        
+        <!--Colors-->
+        <Color x:Key="ColorPrimary">#406661</Color>
+        <Color x:Key="ColorSecondary">#6aa975</Color>
+        <Color x:Key="ColorLight">#c3c3c3</Color>
+        <Color x:Key="ColorDark">#212020</Color>
+        <Color x:Key="ColorLink">#6a94a9</Color>
+        <Color x:Key="ColorAccent">#e8e8e8</Color>
+
+        <!--Icons-->
+        <OnPlatform x:Key="Icon" x:TypeArguments="x:String">
+            <On Platform="Android" Value="icons.ttf#feather-icons" />
+            <!--<On Platform="iOS" Value="customfont" />-->
+        </OnPlatform>
+        
+        <!--Template-->
+        <ControlTemplate x:Key="defaultTemplate">
+            <Grid RowSpacing="0" BackgroundColor="{StaticResource ColorLight}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="85*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <!--Header-->
+                <navigationControls:Header PageTitle="{TemplateBinding Parent.Title}"/>
+                <!--Content-->
+                <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="5" Padding="10">
+                    <ContentPresenter/>
+                </ScrollView>
+                <!--Bar menu-->
+                <navigationControls:BarMenu Grid.Row="2" ActivePage="{TemplateBinding Parent.Title}"/>
+            </Grid>
+        </ControlTemplate>
+        
+    </Application.Resources>
+</Application>

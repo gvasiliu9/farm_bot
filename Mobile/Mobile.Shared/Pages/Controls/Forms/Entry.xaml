@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:renderers="clr-namespace:Mobile.Shared.Renderers"
+             x:Class="Mobile.Shared.Pages.Controls.Forms.Entry">
+   <!--Styles-->
+    <ContentView.Resources>
+        <!--Entry container-->
+        <Style x:Key="entryContainer" TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="5, 0"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}"/>
+        </Style>
+        <!--Entry-->
+        <Style x:Key="entry" TargetType="Entry">
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorPrimary}"/>
+        </Style>
+    </ContentView.Resources>
+    
+  <ContentView.Content>
+        <Frame x:Name="entryContainer" Style="{StaticResource entryContainer}">
+            <renderers:CustomEntry x:Name="entry" Style="{StaticResource entry}"/>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

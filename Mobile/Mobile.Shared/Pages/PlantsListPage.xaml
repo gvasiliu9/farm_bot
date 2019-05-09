@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+             xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
+             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
+             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+             x:Class="Mobile.Shared.Pages.PlantsListPage">
+    
+    <ContentPage.Content>
+        <ContentView ControlTemplate="{StaticResource defaultTemplate}">
+            <StackLayout Spacing="10">
+                <!--Total plants label-->
+                <controls:Label Icon="{x:Static helpers:Icons.list}" Text="{extensions:Translate Key=PlantsListLabel}" Count="0"/>
+                <Label Text="{extensions:Translate Key=PlantsListMessage}"/>
+
+                <!--Add plant link-->
+                <navigationControls:LinkButton Text="{extensions:Translate Key=AddPlant}" Command="{Binding AddPlantCommand}"/>
+
+                <!--Select plant link-->
+                <navigationControls:LinkButton Text="{extensions:Translate Key=SelectPlant}" Command="{Binding SelectPlantCommand}"/>
+                
+                <!--Image-->
+                <Image Source="agriculture.png" Style="{StaticResource pageImage}"/>
+
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>

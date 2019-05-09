@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Shared.Pages.Controls.Label">
+    
+    <ContentView.Resources>
+        <!--Colors-->
+        <Color x:Key="labelTextColor">#212020</Color>
+        <Color x:Key="labelCountColor">#a09f9f</Color>
+        <Color x:Key="labelSeparatorColor">#efefef</Color>
+
+        <!--Styles-->
+        <!--Label container-->
+        <Style x:Key="labelContainer" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Column"/>
+        </Style>
+        <!--Label container frame-->
+        <Style x:Key="labelContainerFrame" TargetType="Frame">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderColor" Value="Transparent"/>
+        </Style>
+        <!--Label content-->
+        <Style x:Key="labelContent" TargetType="FlexLayout">
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="AlignItems" Value="Center"/>
+            <Setter Property="Direction" Value="Row"/>
+        </Style>
+        <!--Label icon-->
+        <Style x:Key="labelIcon" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource labelTextColor}"/>
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="Margin" Value="0, 0, 5, 0"/>
+            <Setter Property="FontFamily" Value="{StaticResource Icon}"/>
+        </Style>
+        <!--Label text-->
+        <Style x:Key="labelText" TargetType="Label">
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="TextColor" Value="{StaticResource labelTextColor}"/>
+        </Style>
+        <!--Label count-->
+        <Style x:Key="labelCount" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource labelCountColor}"/>
+            <Setter Property="Margin" Value="2, 0, 0, 0"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <!--Separator-->
+        <Style x:Key="labelSeparator" TargetType="BoxView">
+            <Setter Property="BackgroundColor" Value="{StaticResource labelSeparatorColor}"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="1"/>
+        </Style>
+    </ContentView.Resources>
+    
+   <!--Content-->
+  <ContentView.Content>
+        <FlexLayout Style="{StaticResource labelContainer}">
+            <Frame Style="{StaticResource labelContainerFrame}">
+                <FlexLayout Style="{StaticResource labelContent}">
+                    <Label x:Name="labelIcon" Style="{StaticResource labelIcon}"/>
+                    <Label x:Name="labelText" Style="{StaticResource labelText}"/>
+                    <Label x:Name="labelCount" Style="{StaticResource labelCount}"/>
+                </FlexLayout>
+            </Frame>
+            <BoxView Style="{StaticResource labelSeparator}"/>
+        </FlexLayout>
+    </ContentView.Content>
+</ContentView>

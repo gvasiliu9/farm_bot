@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
+             x:Class="Mobile.Shared.Pages.Controls.Navigation.Header">
+    <ContentView.Resources>
+        <!--Layout-->
+        <Style x:Key="Header" TargetType="FlexLayout">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimary}"/>
+            <Setter Property="Direction" Value="Row"/>
+            <Setter Property="AlignItems" Value="Center"/>
+            <Setter Property="JustifyContent" Value="SpaceBetween"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+        <!--Labels-->
+        <Style x:Key="headerLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="Margin" Value="15, 0"/>
+        </Style>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <!--Content-->
+        <FlexLayout Style="{StaticResource Header}">
+            <Label x:Name="pageTitleLabel" Style="{StaticResource headerLabel}" />
+            <Label x:Name="logoutLabel" Style="{StaticResource headerLabel}" Text="{extensions:Translate Key=Logout}"/>
+        </FlexLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:renderers="clr-namespace:Mobile.Shared.Renderers"
+             xmlns:i18n="clr-namespace:Mobile.Shared.Extensions"
+             BackgroundColor="{StaticResource ColorPrimary}"
+             x:Class="Mobile.Shared.Pages.LoginPage">
+    
+    <!--Styles-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LoginInputStyle" TargetType="renderers:CustomEntry">
+                <Setter Property="BackgroundColor" Value="#3c514e"/>
+                <Setter Property="TextColor" Value="#6aa975"/>
+                <Setter Property="PlaceholderColor" Value="#6aa975"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <!--Controls-->
+    <ContentPage.Content>
+        <StackLayout Padding="25, 50">
+            <Image Source="logo.png"/>
+            <StackLayout Spacing="10" Margin="0, 20">
+                <!--Entries-->
+                <Label Margin="0, 0, 0, 2" FontSize="Medium" TextColor="White" FontAttributes="None" Text="{i18n:Translate Key=PleaseLogin}"></Label>
+                <renderers:CustomEntry x:Name="usernameEntry" Text="{Binding Username}" Placeholder="{i18n:Translate Key=Username}" Style="{StaticResource LoginInputStyle}"></renderers:CustomEntry>
+                <renderers:CustomEntry x:Name="passwordEntry" Text="{Binding Password}" IsPassword="True" Placeholder="{i18n:Translate Key=Password}" Style="{StaticResource LoginInputStyle}"></renderers:CustomEntry>
+                <!--Login button-->
+                <Button x:Name="loginButton" Style="{StaticResource SuccessButton}" Command="{Binding LoginCommand}" Text="{i18n:Translate Key=Login}">
+                    <Button.Triggers>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference usernameEntry}, Path=Text.Length}"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference passwordEntry}, Path=Text.Length}"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference passwordEntry}, Path=Text.Length}" Value="0">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <!--Copyright-->
+                <Label Margin="0, 5, 0, 0" FontAttributes="Italic" TextColor="#6aa975" FontSize="10" Text="{i18n:Translate Key=CopyRight}"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

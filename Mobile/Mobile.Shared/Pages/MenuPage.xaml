@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
+             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
+             x:Class="Mobile.Shared.Pages.MenuPage"
+             BackgroundColor="{StaticResource ColorLight}">
+    <!--Content-->
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <!--Header-->
+            <navigationControls:Header PageTitle="{extensions:Translate Key=MainMenu}" AbsoluteLayout.LayoutBounds="0, 0, 1, 0.05" AbsoluteLayout.LayoutFlags="All"/>
+            <!--Menu-->
+            <Grid Padding="25" ColumnSpacing="10" RowSpacing="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 0.75">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--Menu Items-->
+                <navigationControls:MenuItem x:Name="currentParamsPageLink" Icon="{x:Static helpers:Icons.bar_chart_2}" Text="{extensions:Translate Key=CurrentParameters}"/>
+                <navigationControls:MenuItem x:Name="plantsListPageLink" Icon="{x:Static helpers:Icons.list}" Text="{extensions:Translate Key=PlantsList}" Grid.Row="0" Grid.Column="1"/>
+                <navigationControls:MenuItem x:Name="realTimeVideoPageLink" Icon="{x:Static helpers:Icons.video}" Text="{extensions:Translate Key=RealTimeVideo}" Grid.Row="1" Grid.Column="0"/>
+                <navigationControls:MenuItem x:Name="settingsPageLink" Icon="{x:Static helpers:Icons.settings}" Text="{extensions:Translate Key=Settings}" Grid.Row="1" Grid.Column="1"/>
+                <Button VerticalOptions="FillAndExpand" 
+                        FontAttributes="Bold" Text="{extensions:Translate Key=Logout}" 
+                        TextColor="White" BackgroundColor="{StaticResource ColorSecondary}"
+                        Grid.Row="2" Grid.ColumnSpan="2"/>
+            </Grid>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

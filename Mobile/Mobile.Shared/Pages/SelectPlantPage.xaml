@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Shared.Pages.SelectPlantPage">
+    <ContentPage.Content>
+        <ContentView ControlTemplate="{StaticResource defaultTemplate}">
+            <!--List view-->
+            <ListView>
+                <ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Potato</x:String>
+                        <x:String>Corn</x:String>
+                        <x:String>Tomato</x:String>
+                        <x:String>Cucumber</x:String>
+                        <x:String>Onion</x:String>
+                        <x:String>Garlig</x:String>
+                    </x:Array>
+                </ListView.ItemsSource>
+            </ListView>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>

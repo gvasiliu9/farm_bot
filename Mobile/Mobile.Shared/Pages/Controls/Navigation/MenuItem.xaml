@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Shared.Pages.Controls.Navigation.MenuItem">
+    <!--Styles-->
+    <ContentView.Resources>
+        <!--Menu item-->
+        <Style x:Key="menuItem" TargetType="FlexLayout">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="Direction" Value="Column"/>
+            <Setter Property="AlignContent" Value="Center"/>
+            <Setter Property="JustifyContent" Value="Center"/>
+        </Style>
+        <!--Menu item icon-->
+        <Style x:Key="menuItemIcon" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorSecondary}"/>
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{StaticResource Icon}"/>
+        </Style>
+        <!--Menu item text-->
+        <Style x:Key="menuItemText" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorSecondary}"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="LineBreakMode" Value="WordWrap"/>
+        </Style>
+    </ContentView.Resources>
+    
+    <!--Content-->
+  <ContentView.Content>
+        <FlexLayout Style="{StaticResource menuItem}">
+            <Label x:Name="menuItemIcon" Style="{StaticResource menuItemIcon}"/>
+            <Label x:Name="menuItemText" Style="{StaticResource menuItemText}"/>
+        </FlexLayout>
+    </ContentView.Content>
+</ContentView>

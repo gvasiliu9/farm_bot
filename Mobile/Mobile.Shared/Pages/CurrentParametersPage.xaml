@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
+             xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+             xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
+             x:Class="Mobile.Shared.Pages.CurrentParametersPage">
+    
+    <!--Styles-->
+    <ContentPage.Resources>
+        <!--Table header-->
+        <Style x:Key="tableHeader" TargetType="Frame">
+            <Setter Property="Padding" Value="10, 5"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorSecondary}"/>
+        </Style>
+        <!--Table cell-->
+        <Style x:Key="tableCell" TargetType="Frame">
+            <Setter Property="Padding" Value="10, 5"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}"/>
+        </Style>
+        <!--Table header text-->
+        <Style x:Key="tableHeaderText" TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="LineBreakMode" Value="WordWrap"/>
+        </Style>
+        <!--Table cell text-->
+        <Style x:Key="tableCellText" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorDark}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="LineBreakMode" Value="WordWrap"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <!--Content-->
+    <ContentPage.Content>
+        <ContentView ControlTemplate="{StaticResource defaultTemplate}">
+            <!--Content-->
+            <StackLayout Spacing="10">
+                <!--Label-->
+                <controls:Label Icon="{x:Static helpers:Icons.bar_chart_2}" Text="{Binding PlantName}"/>
+                
+                <!--Description-->
+                <StackLayout Spacing="0">
+                    <Label Text="{extensions:Translate Key=Info}" FontSize="Small" TextColor="{StaticResource ColorDark}"/>
+                    <Label FontSize="Small" Text="{Binding Description}"/>
+                </StackLayout>
+
+                <!--Table-->
+                <Grid ColumnSpacing="2" RowSpacing="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="30*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Header-->
+                    <Frame Style="{StaticResource tableHeader}">
+                        <Label Text="{extensions:Translate Key=Parameter}" Style="{StaticResource tableHeaderText}"/>
+                    </Frame>
+                    <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource tableHeader}">
+                        <Label Text="{extensions:Translate Key=MeasurementUnit}" Style="{StaticResource tableHeaderText}" />
+                    </Frame>
+                    <Frame Grid.Row="0" Grid.Column="2" Style="{StaticResource tableHeader}">
+                        <Label Text="{extensions:Translate Key=Value}" Style="{StaticResource tableHeaderText}"/>
+                    </Frame>
+                    <!--Air Temperature-->
+                    <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=AirTemperature}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="C" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text="{Binding AirTemperature}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Soli humidity-->
+                    <Frame Grid.Row="2" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=SoilHumidity}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="2" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="%" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="2" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text="{Binding SoilHumidity}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Luminosity-->
+                    <Frame Grid.Row="3" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=Luminosity}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="3" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="%" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="3" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text="{Binding Luminosity}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Seeding date-->
+                    <Frame Grid.Row="4" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=SeedingDate}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="4" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=DateTime}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="4" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text="{Binding SowingDate}"  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Plants distance-->
+                    <Frame Grid.Row="5" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=PlantsDistance}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="5" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="cm" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="5" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text="{Binding PlantsDistance}"  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Row distance-->
+                    <Frame Grid.Row="6" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=RowDistance}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="6" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="cm" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="6" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Row distance-->
+                    <Frame Grid.Row="7" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=SeedDepth}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="7" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="cm" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="7" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Irigations per day-->
+                    <Frame Grid.Row="8" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=IrigationsPerDay}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="8" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="--" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="8" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Water quantity-->
+                    <Frame Grid.Row="9" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=WaterQuantity}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="9" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="l" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="9" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <!--Remaining time-->
+                    <Frame Grid.Row="10" Grid.Column="0" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=RemainingTime}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="10" Grid.Column="1" Style="{StaticResource tableCell}">
+                        <Label Text="{extensions:Translate Key=Days}" Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                    <Frame Grid.Row="10" Grid.Column="2" Style="{StaticResource tableCell}">
+                        <Label Text="{Binding RemainingTime}"  Style="{StaticResource tableCellText}"/>
+                    </Frame>
+                </Grid>
+                
+                <!--Update link-->
+                <navigationControls:LinkButton Text="{extensions:Translate Key=UpdateParameters}" Command="{Binding UpdateParametersCommand}"/>
+
+                <!--Aditional info-->
+                <StackLayout Spacing="5">
+                    <controls:Label Icon="{x:Static helpers:Icons.upload_cloud}" Text="{extensions:Translate Key=AdditionalInfo}"/>
+                    <!--Farm Bot Ip-->
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{extensions:Translate Key=FarmBotIp}"/>
+                                <Span Text=" - "/>
+                                <Span Text="{Binding FarmBotIp}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <!--Username-->
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{extensions:Translate Key=Username}"/>
+                                <Span Text=" - "/>
+                                <Span Text="{Binding Username}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <!--Email-->
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{extensions:Translate Key=Email}"/>
+                                <Span Text=" - "/>
+                                <Span Text="{Binding Email}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>
