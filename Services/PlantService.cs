@@ -14,9 +14,9 @@ namespace Services
     {
         private readonly IHttpRequest _httpRequest;
 
-        public PlantService(IHttpRequest httpRequest)
+        public PlantService()
         {
-            _httpRequest = httpRequest;
+            _httpRequest = new HttpRequest();
         }
 
         public async Task AddAsync(Plant plant)

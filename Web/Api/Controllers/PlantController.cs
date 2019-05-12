@@ -72,6 +72,7 @@ namespace Api.Controllers
             }
         }
 
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult Put([FromBody] Plant plant)
@@ -124,6 +125,33 @@ namespace Api.Controllers
 
                 // Remove
                 _plantRepository.Remove(plantToRemove);
+
+                // Save
+                _farmBotDbContext.SaveChanges();
+
+                // Return result
+                return NoContent();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        public ActionResult Delete()
+        {
+            try
+            {
+                // Get plant
+                IQueryable<Plant> plantsToRemove = _plantRepository.GetAll();
+
+                // Check
+                if (!plantsToRemove.Any())
+                    return NotFound();
+
+                // Remove
+                _plantRepository.RemoveRange(plantsToRemove);
 
                 // Save
                 _farmBotDbContext.SaveChanges();

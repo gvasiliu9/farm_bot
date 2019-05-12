@@ -158,16 +158,16 @@ namespace Tests.Services
         [Fact]
         public async Task Add_Get_Update_Delete_Success()
         {
-            // Add
+            // Add items
             await Add();
 
-            // Get
+            // Get items
             await Get();
 
-            // Update
+            // Update items
             await Update();
 
-            // Delete
+            // Delete items
             await Delete();
         }
     }

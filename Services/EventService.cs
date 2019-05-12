@@ -14,9 +14,9 @@ namespace Services
     {
         private readonly IHttpRequest _httpRequest;
 
-        public EventService(IHttpRequest httpRequest)
+        public EventService()
         {
-            _httpRequest = httpRequest;
+            _httpRequest = new HttpRequest();
         }
 
         public async Task AddAsync(Event farmBotEvent)

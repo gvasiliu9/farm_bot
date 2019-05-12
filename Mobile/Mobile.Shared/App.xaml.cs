@@ -29,7 +29,7 @@ namespace Mobile.Shared
 
             #endif
 
-            MainPage = new NavigationPage(new MenuPage());
+            //MainPage = new NavigationPage(new MenuPage());
         }
 
         protected override void OnStart()

@@ -14,9 +14,9 @@ namespace Services
     {
         private readonly IHttpRequest _httpRequest;
 
-        public ParametersService(IHttpRequest httpRequest)
+        public ParametersService()
         {
-            _httpRequest = httpRequest;
+            _httpRequest = _httpRequest = new HttpRequest();
         }
 
         public async Task AddAsync(Parameters parameters)

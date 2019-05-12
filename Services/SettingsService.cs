@@ -14,9 +14,9 @@ namespace Services
     {
         private readonly IHttpRequest _httpRequest;
 
-        public SettingsService(IHttpRequest httpRequest)
+        public SettingsService()
         {
-            _httpRequest = httpRequest;
+            _httpRequest = new HttpRequest();
         }
 
         public async Task AddAsync(Settings settings)

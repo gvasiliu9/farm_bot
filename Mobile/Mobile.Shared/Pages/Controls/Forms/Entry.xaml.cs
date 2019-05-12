@@ -46,6 +46,22 @@ namespace Mobile.Shared.Pages.Controls.Forms
             }
         }
 
+        public static readonly BindableProperty KeyboardProperty = BindableProperty
+            .Create(nameof(Keyboard), typeof(Xamarin.Forms.Keyboard), typeof(Entry), default(Xamarin.Forms.Keyboard));
+
+        public Xamarin.Forms.Keyboard Keyboard
+        {
+            get
+            {
+                return (Xamarin.Forms.Keyboard)GetValue(KeyboardProperty);
+            }
+
+            set
+            {
+                SetValue(KeyboardProperty, value);
+            }
+        }
+
         public static readonly BindableProperty BorderColorProperty = BindableProperty
             .Create(nameof(BorderColor), typeof(Color), typeof(Entry), default(Color));
 
@@ -147,8 +163,17 @@ namespace Mobile.Shared.Pages.Controls.Forms
             {
                 entryContainer.BackgroundColor = BackgroundColor;
             }
+            if (propertyName == KeyboardProperty.PropertyName)
+            {
+                entry.Keyboard = Keyboard;
+            }
         }
 
         #endregion
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Text = e.NewTextValue;
+        }
     }
 }

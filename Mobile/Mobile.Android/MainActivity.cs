@@ -7,11 +7,21 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Mobile.Shared;
+using MvvmCross.Forms.Platforms.Android.Views;
+using MvvmCross.Forms.Platforms.Android.Core;
+using Services;
+using Acr.UserDialogs;
 
 namespace Mobile.Android
 {
-    [Activity(Label = "Farm Bot", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme.Base", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Label = "Farm Bot", 
+        Icon = "@mipmap/ic_launcher", 
+        Theme = "@style/MainTheme.Base", 
+        MainLauncher = false, 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        ScreenOrientation = ScreenOrientation.Portrait,
+        LaunchMode = LaunchMode.SingleTask)]
+    public class MainActivity : MvxFormsAppCompatActivity<MvxFormsAndroidSetup<MvvmCrossApp, App>, MvvmCrossApp, App>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -19,8 +29,8 @@ namespace Mobile.Android
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            UserDialogs.Init(this);
         }
     }
 }

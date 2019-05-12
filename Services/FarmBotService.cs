@@ -13,9 +13,9 @@ namespace Services
     { 
         private readonly IHttpRequest _httpRequest;
 
-        public FarmBotService(IHttpRequest httpRequest)
+        public FarmBotService()
         {
-            _httpRequest = httpRequest;
+            _httpRequest = new HttpRequest();
         }
 
         public async Task AddAsync(FarmBot farmBot)

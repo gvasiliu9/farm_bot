@@ -17,18 +17,18 @@ namespace Tests.Services
         public static Guid ParametersId { get; } = Guid.Parse("e5f49e7e-c0b4-4161-bc09-8ec84121e3ef");
 
         public static IEventService EventService { get; } 
-            = new EventService(new HttpRequest());
+            = new EventService();
 
         public static IFarmBotService FarmBotService { get; } 
-            = new FarmBotService(new HttpRequest());
+            = new FarmBotService();
 
         public static IParametersService ParametersService { get; }
-            = new ParametersService(new HttpRequest());
+            = new ParametersService();
 
         public static IPlantService PlantService { get; } 
-            = new PlantService(new HttpRequest());
+            = new PlantService();
 
         public static ISettingsService SettingsService { get; } 
-            = new SettingsService(new HttpRequest());
+            = new SettingsService();
     }
 }

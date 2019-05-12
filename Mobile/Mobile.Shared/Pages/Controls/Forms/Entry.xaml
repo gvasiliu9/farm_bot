@@ -21,7 +21,7 @@
     
   <ContentView.Content>
         <Frame x:Name="entryContainer" Style="{StaticResource entryContainer}">
-            <renderers:CustomEntry x:Name="entry" Style="{StaticResource entry}"/>
+            <renderers:CustomEntry x:Name="entry" TextChanged="Entry_TextChanged" Style="{StaticResource entry}"/>
         </Frame>
     </ContentView.Content>
 </ContentView>

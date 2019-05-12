@@ -6,16 +6,9 @@ namespace Services.Helpers
 {
     public static class Endpoints
     {
+        //public static string BaseAddress { get; set; } = "http://localhost:58347/api/";
 
-        #if DEBUG
-
-            public static string BaseAddress { get; set; } = "http://localhost:58347/api/";
-
-        #else
-
-            public static string BaseAddress { get; set; } = "https://farmbotapi.azurewebsites.net/api/";
-
-        #endif
+        public static string BaseAddress { get; set; } = "https://farmbotapi.azurewebsites.net/api/";
 
         public static string Parameters { get; } = "parameters";
 
