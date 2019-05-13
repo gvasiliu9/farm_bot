@@ -10,6 +10,7 @@
     xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
     xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
     xmlns:formControls="clr-namespace:Mobile.Shared.Pages.Controls.Forms"
+    mvx:Bi.nd="Title Translate[PlantParameters]"
     x:Class="Mobile.Shared.Pages.AddPlantPage">
     <!--Content-->
     <ContentPage.Content>
@@ -20,7 +21,8 @@
                 Padding="0, 0, 0, 30">
                 <!--Page label-->
                 <controls:Label 
-                    Text="{extensions:Translate Key=PlantParameters}" 
+                    Text="{extensions:Translate Key=PlantParameters}"
+                    mvx:Bi.nd="Text Translate[PlantParameters]"
                     Icon="{x:Static helpers:Icons.bar_chart_2}"/>
                 <!--Form-->
                 <StackLayout Spacing="10">
@@ -111,7 +113,6 @@
                             mvx:Bi.nd="Command AddCommand"/>
                     </FlexLayout>
                 </StackLayout>
-                
             </StackLayout>
         </ContentView>
     </ContentPage.Content>

@@ -20,7 +20,6 @@ namespace Mobile.Shared.Pages
 
             InitializeComponent();
 
-            this.Title = AppResources.AddPlant;
         }
 	}
 }

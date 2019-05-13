@@ -16,11 +16,11 @@
         <AbsoluteLayout>
             <!--Header-->
             <navigationControls:Header 
-                PageTitle="{extensions:Translate Key=MainMenu}" 
+                mvx:Bi.nd="PageTitle Translate[MainMenu]" 
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 0.05" 
                 AbsoluteLayout.LayoutFlags="All"/>
             <!--Menu-->
-            <Grid 
+            <Grid
                 Padding="25" 
                 ColumnSpacing="10" 
                 RowSpacing="10" 
@@ -39,37 +39,33 @@
                 <navigationControls:MenuItem 
                     x:Name="currentParamsPageLink"
                     Icon="{x:Static helpers:Icons.bar_chart_2}"
-                    Text="{extensions:Translate Key=CurrentParameters}"
-                    mvx:Bi.nd="Command ToParametersCommand;"/>
+                    mvx:Bi.nd="Command ToParametersCommand; Text Translate[CurrentParameters]"/>
                 <!--Plants-->
                 <navigationControls:MenuItem 
                     x:Name="plantsListPageLink" 
                     Icon="{x:Static helpers:Icons.list}" 
-                    Text="{extensions:Translate Key=PlantsList}" 
-                    mvx:Bi.nd="Command ToPlantsCommand;"
+                    mvx:Bi.nd="Command ToPlantsCommand; Text Translate[PlantsList]"
                     Grid.Row="0" 
                     Grid.Column="1"/>
                 <!--Video-->
                 <navigationControls:MenuItem 
                     x:Name="realTimeVideoPageLink" 
                     Icon="{x:Static helpers:Icons.video}" 
-                    Text="{extensions:Translate Key=RealTimeVideo}"
-                    mvx:Bi.nd="Command ToVideoCommand;"
+                    mvx:Bi.nd="Command ToVideoCommand; Text Translate[RealTimeVideo]"
                     Grid.Row="1" 
                     Grid.Column="0"/>
                 <!--Settings-->
                 <navigationControls:MenuItem 
                     x:Name="settingsPageLink" 
                     Icon="{x:Static helpers:Icons.settings}" 
-                    Text="{extensions:Translate Key=Settings}" 
-                    mvx:Bi.nd="Command ToSettingsCommand;"
+                    mvx:Bi.nd="Command ToSettingsCommand; Text Translate[Settings]"
                     Grid.Row="1" 
                     Grid.Column="1"/>
                 <!--Logout-->
                 <Button 
                     VerticalOptions="FillAndExpand" 
                     FontAttributes="Bold" 
-                    Text="{extensions:Translate Key=Logout}" 
+                    mvx:Bi.nd="Text Translate[Logout]"
                     TextColor="White" 
                     BackgroundColor="{StaticResource ColorSecondary}"
                     Grid.Row="2" 

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Services.ViewModels
 {
-    public class AddPlantViewModel : MvxViewModel
+    public class AddPlantViewModel : BaseViewModel
     {
         #region Properties
 
@@ -20,6 +20,13 @@ namespace Services.ViewModels
         {
             get => _name;
             set => SetProperty(ref _name, value);
+        }
+
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
         private string _info;

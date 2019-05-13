@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Services.ViewModels
 {
-    public class MenuViewModel : MvxViewModel
+    public class MenuViewModel : BaseViewModel
     {
         public readonly IMvxNavigationService _navigationService;
 
@@ -33,19 +33,16 @@ namespace Services.ViewModels
             // Redirect to plants page
             ToPlantsCommand = new MvxCommand(async () =>
             {
-                int i = 0;
             });
 
             // Redirect to video & controll page
             ToVideoCommand = new MvxCommand(async () =>
             {
-                int i = 0;
             });
 
             // Redirect to video & controll page
             ToSettingsCommand = new MvxCommand(async () =>
             {
-                int i = 0;
             });
         }
     }
