@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mobile.Shared.ViewModels;
+using MvvmCross.Forms.Views;
+using Services.ViewModels;
 
 namespace Mobile.Shared.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PlantsListPage : ContentPage
+	public partial class PlantsListPage : MvxContentPage<PlantsListViewModel>
 	{
 		public PlantsListPage ()
 		{
             NavigationPage.SetHasNavigationBar(this, false);
 
             InitializeComponent();
-
-            this.Title = AppResources.PlantsList;
-
-            BindingContext = new PlantsListViewModel();
         }
     }
 }

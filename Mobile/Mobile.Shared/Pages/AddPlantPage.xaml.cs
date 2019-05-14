@@ -19,7 +19,6 @@ namespace Mobile.Shared.Pages
             NavigationPage.SetHasNavigationBar(this, false);
 
             InitializeComponent();
-
         }
 	}
 }

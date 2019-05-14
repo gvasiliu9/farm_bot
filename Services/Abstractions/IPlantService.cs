@@ -8,6 +8,5 @@ namespace Services.Abstractions
 {
     public interface IPlantService : IService<Plant>
     {
-
     }
 }

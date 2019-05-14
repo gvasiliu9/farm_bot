@@ -55,7 +55,7 @@ namespace Mobile.Shared.Pages.Controls.Navigation
             this.GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = new Command(() => {
-                    if (Command.CanExecute(CommandParameter))
+                    if (Command != null && Command.CanExecute(CommandParameter))
                     {
                         Command.Execute(CommandParameter);
                     }

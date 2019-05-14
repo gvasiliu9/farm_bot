@@ -90,8 +90,8 @@ namespace Api.Controllers
 
                 // Update
                 settingsToUpdate.FarmBotId = settings.FarmBotId;
-                settings.PlantId = settings.PlantId;
-                settings.Updated = DateTime.Now;
+                settingsToUpdate.PlantId = settings.PlantId;
+                settingsToUpdate.Updated = DateTime.Now;
 
                 // Save
                 _farmBotDbContext.SaveChanges();
