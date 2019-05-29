@@ -49,7 +49,7 @@ namespace Mobile.Shared.Pages.Controls.Navigation
             var currentParametersIconTapGesture = new TapGestureRecognizer();
             currentParametersIconTapGesture.Tapped += (s, e) =>
             {
-                Application.Current.MainPage = new NavigationPage(new CurrentParametersPage());
+                Application.Current.MainPage = new NavigationPage(new ParametersPage());
             };
 
             currentParametersIcon.GestureRecognizers.Add(currentParametersIconTapGesture);

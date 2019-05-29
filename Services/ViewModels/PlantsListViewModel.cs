@@ -36,35 +36,27 @@ namespace Services.ViewModels
 
         private readonly IPlantService _plantService;
 
-        private readonly IUserDialogs _userDialogs;
-
-        private readonly IMvxNavigationService _navigationService;
-
         #endregion
 
-        public PlantsListViewModel(IMvxNavigationService navigationService
-            , IPlantService plantService
-            , IUserDialogs userDialogs)
+        public PlantsListViewModel(IPlantService plantService, IUserDialogs userDialogs)
         {
             _plantService = plantService;
 
-            _userDialogs = userDialogs;
-
-            _navigationService = navigationService;
+            UserDialogs = userDialogs;
 
             AddPlantCommand = new MvxCommand(async () => await AddPlant());
 
             SelectPlantCommand = new MvxCommand(async () => await SelectPlant());
 
             // Get plants count
-            Task.Run(async () =>
-            {
-                _userDialogs.ShowLoading(I18N.Current["LoadingMessage"]);
+            //Task.Run(async () =>
+            //{
+            //    IsBusy();
 
-                Count = "" + _plantService.GetAllAsync().Result.ToList().Count();
+            //    Count = "" + _plantService.GetAllAsync().Result.ToList().Count();
 
-                _userDialogs.HideLoading();
-            });
+            //    IsBusy(false);
+            //});
         }
 
         #region Methods
@@ -73,12 +65,12 @@ namespace Services.ViewModels
 
         private async Task AddPlant()
         {
-            await _navigationService.Navigate<AddPlantViewModel>();
+            await NavigationService.Navigate<AddPlantViewModel>();
         }
 
         private async Task SelectPlant()
         {
-            await _navigationService.Navigate<SelectPlantViewModel>();
+            await NavigationService.Navigate<SelectPlantViewModel>();
         }
 
         #endregion

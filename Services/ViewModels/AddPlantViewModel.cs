@@ -111,17 +111,13 @@ namespace Services.ViewModels
 
         #endregion
 
-        public AddPlantViewModel(IMvxNavigationService navigationService
-            , IPlantService plantService
-            , IUserDialogs userDialogs)
+        public AddPlantViewModel(IPlantService plantService, IUserDialogs userDialogs)
         {
+            UserDialogs = userDialogs;
+
             _plantService = plantService;
 
-            _userDialogs = userDialogs;
-
             _validator = new PlantValidator();
-
-            _navigationService = navigationService;
 
             AddCommand = new MvxCommand(async () => await Add());
 
@@ -135,26 +131,25 @@ namespace Services.ViewModels
             try
             {
                 // Loading
-                _userDialogs.ShowLoading(I18N.Current["LoadingMessage"], MaskType.Clear);
+                IsBusy();
 
                 // Add plant
                 await _plantService.AddAsync(_plant);
 
-                _userDialogs.HideLoading();
-
                 // Success
-                _userDialogs.Toast(I18N.Current["ItemAdded"]);
+                UserDialogs.Toast(I18N.Current["ItemAdded"]);
             }
             catch (Exception ex)
             {
-                _userDialogs.Toast(ex.Message);
-                _userDialogs.HideLoading();
+                UserDialogs.Toast(ex.Message);
             }
+
+            IsBusy(false);
         }
 
         private async Task Cancel()
         {
-            await _navigationService.Close(this);
+            await NavigationService.Close(this);
         }
 
         #region Events

@@ -1,12 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
-             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
-             xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
-             xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
-             x:Class="Mobile.Shared.Pages.CurrentParametersPage">
-    
+﻿<views:MvxContentPage
+    x:TypeArguments="viewModels:ParametersViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Services.ViewModels;assembly=Services"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+    xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
+    xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+    xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
+    mvx:Bi.nd="Title Translate[Parameters]"
+    x:Class="Mobile.Shared.Pages.ParametersPage">
+
     <!--Styles-->
     <ContentPage.Resources>
         <!--Table header-->
@@ -41,19 +46,19 @@
             <Setter Property="LineBreakMode" Value="WordWrap"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <!--Content-->
     <ContentPage.Content>
         <ContentView ControlTemplate="{StaticResource defaultTemplate}">
             <!--Content-->
             <StackLayout Spacing="10">
                 <!--Label-->
-                <controls:Label Icon="{x:Static helpers:Icons.bar_chart_2}" Text="{Binding PlantName}"/>
-                
+                <controls:Label Icon="{x:Static helpers:Icons.bar_chart_2}" mvx:Bi.nd="Text Plant.Name"/>
+
                 <!--Description-->
                 <StackLayout Spacing="0">
                     <Label Text="{extensions:Translate Key=Info}" FontSize="Small" TextColor="{StaticResource ColorDark}"/>
-                    <Label FontSize="Small" Text="{Binding Description}"/>
+                    <Label FontSize="Small" mvx:Bi.nd="Text Plant.Info"/>
                 </StackLayout>
 
                 <!--Table-->
@@ -91,10 +96,10 @@
                         <Label Text="{extensions:Translate Key=AirTemperature}" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource tableCell}">
-                        <Label Text="C" Style="{StaticResource tableCellText}"/>
+                        <Label Text="°C" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="1" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text="{Binding AirTemperature}" Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Parameters.AirTemperature" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Soli humidity-->
                     <Frame Grid.Row="2" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -104,7 +109,7 @@
                         <Label Text="%" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="2" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text="{Binding SoilHumidity}" Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Parameters.SoilHumidity" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Luminosity-->
                     <Frame Grid.Row="3" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -114,7 +119,7 @@
                         <Label Text="%" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="3" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text="{Binding Luminosity}" Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Parameters.Luminosity" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Seeding date-->
                     <Frame Grid.Row="4" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -124,7 +129,7 @@
                         <Label Text="{extensions:Translate Key=DateTime}" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="4" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text="{Binding SowingDate}"  Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text SeedingDate" Text="{Binding SowingDate}"  Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Plants distance-->
                     <Frame Grid.Row="5" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -134,7 +139,7 @@
                         <Label Text="cm" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="5" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text="{Binding PlantsDistance}"  Style="{StaticResource tableCellText}"/>
+                        <Label Text="0" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Row distance-->
                     <Frame Grid.Row="6" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -144,9 +149,9 @@
                         <Label Text="cm" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="6" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Plant.RowDistance"  Style="{StaticResource tableCellText}"/>
                     </Frame>
-                    <!--Row distance-->
+                    <!--Seed depth-->
                     <Frame Grid.Row="7" Grid.Column="0" Style="{StaticResource tableCell}">
                         <Label Text="{extensions:Translate Key=SeedDepth}" Style="{StaticResource tableCellText}"/>
                     </Frame>
@@ -154,17 +159,17 @@
                         <Label Text="cm" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="7" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Plant.SeedDepth"  Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Irigations per day-->
                     <Frame Grid.Row="8" Grid.Column="0" Style="{StaticResource tableCell}">
                         <Label Text="{extensions:Translate Key=IrigationsPerDay}" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="8" Grid.Column="1" Style="{StaticResource tableCell}">
-                        <Label Text="--" Style="{StaticResource tableCellText}"/>
+                        <Label Text="Number" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="8" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Plant.IrigationsPerDay" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Water quantity-->
                     <Frame Grid.Row="9" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -174,7 +179,7 @@
                         <Label Text="l" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="9" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text=""  Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text Plant.WaterQuanity"  Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <!--Remaining time-->
                     <Frame Grid.Row="10" Grid.Column="0" Style="{StaticResource tableCell}">
@@ -184,10 +189,10 @@
                         <Label Text="{extensions:Translate Key=Days}" Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame Grid.Row="10" Grid.Column="2" Style="{StaticResource tableCell}">
-                        <Label Text="{Binding RemainingTime}"  Style="{StaticResource tableCellText}"/>
+                        <Label mvx:Bi.nd="Text RemainingTime" Style="{StaticResource tableCellText}"/>
                     </Frame>
                 </Grid>
-                
+
                 <!--Update link-->
                 <navigationControls:LinkButton Text="{extensions:Translate Key=UpdateParameters}" Command="{Binding UpdateParametersCommand}"/>
 
@@ -200,7 +205,7 @@
                             <FormattedString>
                                 <Span Text="{extensions:Translate Key=FarmBotIp}"/>
                                 <Span Text=" - "/>
-                                <Span Text="{Binding FarmBotIp}"/>
+                                <Span mvx:Bi.nd="Text FarmBot.IpAddress"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -210,7 +215,7 @@
                             <FormattedString>
                                 <Span Text="{extensions:Translate Key=Username}"/>
                                 <Span Text=" - "/>
-                                <Span Text="{Binding Username}"/>
+                                <Span Text="john.doe"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -220,13 +225,13 @@
                             <FormattedString>
                                 <Span Text="{extensions:Translate Key=Email}"/>
                                 <Span Text=" - "/>
-                                <Span Text="{Binding Email}"/>
+                                <Span Text="joh.doe@email.com"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
-                
+
             </StackLayout>
         </ContentView>
     </ContentPage.Content>
-</ContentPage>
+</views:MvxContentPage>

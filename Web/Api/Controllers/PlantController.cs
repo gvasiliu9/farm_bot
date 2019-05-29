@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Api.SignalR;
 using Data;
 using Data.Services;
 using Entites;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
@@ -14,15 +17,24 @@ namespace Api.Controllers
     [ApiController]
     public class PlantController : ControllerBase
     {
+        #region Services
+
         private readonly FarmBotDbContext _farmBotDbContext;
 
         private readonly IRepository<Plant> _plantRepository;
 
-        public PlantController(FarmBotDbContext farmBotDbContext)
+        private readonly IHubContext<CommunicationHub, ICommunicationHub> _communicationHubContext;
+
+        #endregion
+
+        public PlantController(FarmBotDbContext farmBotDbContext
+            , IHubContext<CommunicationHub, ICommunicationHub> communicationHubContext)
         {
             _farmBotDbContext = farmBotDbContext;
 
             _plantRepository = new Repository<Plant>(_farmBotDbContext);
+
+            _communicationHubContext = communicationHubContext;
         }
 
         [HttpGet]
@@ -49,7 +61,7 @@ namespace Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Plant> Post([FromBody] Plant plant)
+        public async Task<ActionResult<Plant>> Post([FromBody] Plant plant)
         {
             try
             {
@@ -62,6 +74,9 @@ namespace Api.Controllers
 
                 // Save
                 _farmBotDbContext.SaveChanges();
+
+                // Notify
+                await _communicationHubContext.Clients.All.ReceiveMessage("", $"{plant.Name} plant created");
 
                 // Return result
                 return CreatedAtAction(nameof(Get), plant);

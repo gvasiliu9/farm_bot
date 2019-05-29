@@ -23,8 +23,9 @@ namespace Services
             //    .RegisterAsLazySingleton();
 
             Mvx.IoCProvider.RegisterSingleton<IPlantService>(new PlantService());
+            Mvx.IoCProvider.RegisterSingleton<IFarmBotService>(new FarmBotService());
             Mvx.IoCProvider.RegisterSingleton<ISettingsService>(new SettingsService());
-
+            Mvx.IoCProvider.RegisterSingleton<IParametersService>(new ParametersService());
             Mvx.IoCProvider.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
 
             RegisterAppStart<MenuViewModel>();

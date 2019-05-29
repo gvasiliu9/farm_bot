@@ -6,13 +6,13 @@
   package="com.utm.farmbot" 
   android:installLocation="auto">
 	<!--Configs-->
-  <uses-sdk 
-    android:minSdkVersion="21" 
-    android:targetSdkVersion="27" />
-	<application 
-    android:label="FarmBot">
-  </application>
+  <uses-sdk  android:minSdkVersion="21" android:targetSdkVersion="27" />
+  <application android:label="FarmBot"/>
    <!--Permissions-->
-  <uses-permission 
-    android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 </manifest>

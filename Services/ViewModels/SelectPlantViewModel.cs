@@ -45,39 +45,33 @@ namespace Services.ViewModels
 
         private readonly IPlantService _plantService;
 
-        private readonly IUserDialogs _userDialogs;
-
-        private readonly IMvxNavigationService _navigationService;
-
         #endregion
 
-        public SelectPlantViewModel(IUserDialogs userDialogs
-            , IMvxNavigationService navigationService
-            , IPlantService plantService
-            , ISettingsService settingsService)
+        public SelectPlantViewModel(IPlantService plantService
+            , ISettingsService settingsService, IUserDialogs userDialogs)
         {
-            _navigationService = navigationService;
-            _userDialogs = userDialogs;
             _settingService = settingsService;
             _plantService = plantService;
+
+            UserDialogs = userDialogs;
 
             // Get plants
             Task.Run(async() => {
 
-                _userDialogs.ShowLoading(I18N.Current["LoadingMessage"]);
+                IsBusy();
 
                 var getPlantsResult = await _plantService.GetAllAsync();
 
                 foreach (Plant plant in getPlantsResult)
                     _plants.Add(plant);
 
-                _userDialogs.HideLoading();
+                IsBusy(false);
             });
         }
 
         private void ItemSelected()
         {
-            _userDialogs.Confirm(new ConfirmConfig
+            UserDialogs.Confirm(new ConfirmConfig
             {
                 Title = I18N.Current["Confirmation"],
                 Message = I18N.Current["StartProcessQuestion"],
@@ -96,7 +90,7 @@ namespace Services.ViewModels
             try
             {
                 // Apply
-                _userDialogs.ShowLoading(I18N.Current["LoadingMessage"]);
+                IsBusy();
 
                 await Task.Delay(5000);
 
@@ -107,16 +101,16 @@ namespace Services.ViewModels
                 await _settingService.UpdateAsync(userSettings);
 
                 // Result
-                _userDialogs.Toast(I18N.Current["ProcessIsStarted"]);
+                UserDialogs.Toast(I18N.Current["ProcessIsStarted"]);
 
-                await _navigationService.Close(this);
+                await NavigationService.Close(this);
             }
             catch(Exception ex)
             {
-                _userDialogs.Toast(ex.Message);
+                UserDialogs.Toast(ex.Message);
             }
 
-            _userDialogs.HideLoading();
+            IsBusy(false);
         }
     }
 }

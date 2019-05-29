@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mobile.Shared.ViewModels;
+using Services.ViewModels;
+using MvvmCross.Forms.Views;
 
 namespace Mobile.Shared.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CurrentParametersPage : ContentPage
+	public partial class ParametersPage : MvxContentPage<ParametersViewModel>
 	{
-		public CurrentParametersPage ()
+		public ParametersPage ()
 		{
             NavigationPage.SetHasNavigationBar(this, false);
 
             InitializeComponent ();
-
-            this.Title = AppResources.CurrentParameters;
-
-            BindingContext = new CurrentParametersViewModel();
         }
     }
 }

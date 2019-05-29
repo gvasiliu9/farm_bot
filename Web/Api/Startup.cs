@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.SignalR;
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,8 @@ namespace Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<FarmBotDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -38,6 +41,11 @@ namespace Api
             }
 
             app.UseMvc();
+
+            app.UseSignalR(route =>
+            {
+                route.MapHub<CommunicationHub>("/communicationhub");
+            });
         }
     }
 }

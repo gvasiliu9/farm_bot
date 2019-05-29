@@ -25,11 +25,16 @@ namespace Mobile.Shared
 
             #if DEBUG
 
-            HotReloader.Current.Start(this);
+            try
+            {
+                HotReloader.Current.Start(this);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
 
             #endif
-
-            //MainPage = new NavigationPage(new MenuPage());
         }
 
         protected override void OnStart()

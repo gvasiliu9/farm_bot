@@ -10,7 +10,11 @@ namespace Services.ViewModels
 {
     public class MenuViewModel : BaseViewModel
     {
-        public readonly IMvxNavigationService _navigationService;
+        #region Services
+
+        #endregion
+
+        #region Commands
 
         public IMvxCommand ToParametersCommand { get; }
 
@@ -20,29 +24,32 @@ namespace Services.ViewModels
 
         public IMvxCommand ToSettingsCommand { get; }
 
-        public MenuViewModel(IMvxNavigationService navigationService)
-        {
-            _navigationService = navigationService;
+        #endregion
 
+        public MenuViewModel()
+        {
             // Redirect to parameters page
             ToParametersCommand = new MvxCommand(async () =>
             {
-                await _navigationService.Navigate<AddPlantViewModel>();
+                await NavigationService.Navigate<ParametersViewModel>();
             });
 
             // Redirect to plants page
             ToPlantsCommand = new MvxCommand(async () =>
             {
+                await NavigationService.Navigate<AddPlantViewModel>();
             });
 
             // Redirect to video & controll page
             ToVideoCommand = new MvxCommand(async () =>
             {
+                await NavigationService.Navigate<RealtimeViewModel>();
             });
 
             // Redirect to video & controll page
             ToSettingsCommand = new MvxCommand(async () =>
             {
+                await NavigationService.Navigate<AddPlantViewModel>();
             });
         }
     }

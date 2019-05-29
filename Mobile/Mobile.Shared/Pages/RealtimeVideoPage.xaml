@@ -1,22 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"             
-             xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
-             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
-             x:Class="Mobile.Shared.Pages.RealtimeVideoPage">
+<views:MvxContentPage
+    x:TypeArguments="viewModels:RealtimeViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Services.ViewModels;assembly=Services"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"             
+    xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+    xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
+    mvx:Bi.nd="Title Translate[RealTimeVideo]"
+    x:Class="Mobile.Shared.Pages.RealtimeVideoPage">
     <ContentPage.Content>
         <ContentView ControlTemplate="{StaticResource defaultTemplate}">
-            <StackLayout Spacing="10">
+            <StackLayout 
+                Spacing="10">
                 <!--Page label-->
-                <controls:Label Icon="{x:Static helpers:Icons.video}" Text="{extensions:Translate Key=Loading}"/>
+                <controls:Label 
+                    Icon="{x:Static helpers:Icons.video}" 
+                    mvx:Bi.nd="Text Translate[RealTimeVideoLabel]"/>
             
                 <!--Video-->
-                <Image Source="video.png" Style="{StaticResource pageImage}"/>
+                <!--<Image 
+                    Source="video.png" 
+                    Style="{StaticResource pageImage}"/>-->
+
+                <!--<WebView VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" Source="http://192.168.1.6:8080/jsfs.html"/>-->
+                <Frame/>
 
                 <!--Controls-->
-                <controls:Label Icon="{x:Static helpers:Icons.sliders}" Text="{extensions:Translate Key=Controls}"/>
-                <Grid>
+                <controls:Label 
+                    Icon="{x:Static helpers:Icons.sliders}"
+                    mvx:Bi.nd="Text Translate[Controls]"/>
+                <Grid 
+                    VerticalOptions="CenterAndExpand"
+                    RowSpacing="20" 
+                    ColumnSpacing="20">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -27,13 +46,34 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="1" Text="Forward" Style="{StaticResource SuccessButton}"/>
-                    <Button Grid.Row="1" Grid.Column="0" Text="Left" Style="{StaticResource SuccessButton}"/>
-                    <Button Grid.Row="1" Grid.Column="2" Text="Right" Style="{StaticResource SuccessButton}"/>
-                    <Button Grid.Row="2" Grid.Column="1" Text="Back" Style="{StaticResource SuccessButton}"/>
+                    <Button 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Text="Forward" 
+                        Style="{StaticResource SuccessButton}"/>
+                    <Button 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        Text="Left" 
+                        Style="{StaticResource SuccessButton}"/>
+                    <Button
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Text="Home"
+                        Clicked="Button_Clicked"
+                        Style="{StaticResource SuccessButton}"/>
+                    <Button 
+                        Grid.Row="1" 
+                        Grid.Column="2" 
+                        Text="Right" 
+                        Style="{StaticResource SuccessButton}"/>
+                    <Button 
+                        Grid.Row="2" 
+                        Grid.Column="1" 
+                        Text="Back" 
+                        Style="{StaticResource SuccessButton}"/>
                 </Grid>
-                
             </StackLayout>
         </ContentView>
     </ContentPage.Content>
-</ContentPage>
+</views:MvxContentPage>

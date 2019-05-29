@@ -39,7 +39,7 @@
                 <navigationControls:MenuItem 
                     x:Name="currentParamsPageLink"
                     Icon="{x:Static helpers:Icons.bar_chart_2}"
-                    mvx:Bi.nd="Command ToParametersCommand; Text Translate[CurrentParameters]"/>
+                    mvx:Bi.nd="Command ToParametersCommand; Text Translate[Parameters]"/>
                 <!--Plants-->
                 <navigationControls:MenuItem 
                     x:Name="plantsListPageLink" 

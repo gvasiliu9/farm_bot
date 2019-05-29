@@ -11,6 +11,7 @@ using MvvmCross.Forms.Platforms.Android.Views;
 using MvvmCross.Forms.Platforms.Android.Core;
 using Services;
 using Acr.UserDialogs;
+using Xamarin.Forms.OpenTok.Android.Service;
 
 namespace Mobile.Android
 {
@@ -31,6 +32,8 @@ namespace Mobile.Android
             base.OnCreate(savedInstanceState);
 
             UserDialogs.Init(this);
+
+            PlatformOpenTokService.Init();
         }
     }
 }
