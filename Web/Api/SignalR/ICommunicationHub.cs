@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +8,10 @@ namespace Api.SignalR
 {
     public interface ICommunicationHub
     {
-        Task SendMessage(string user, string message);
+        Task RemoteControl(string direction);
 
-        Task ReceiveMessage(string user, string message);
+        Task Seeding(Plant plant);
 
-        Task ReceiveMessage(string message);
+        Task Message(string message);
     }
 }

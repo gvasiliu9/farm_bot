@@ -76,7 +76,7 @@ namespace Api.Controllers
                 _farmBotDbContext.SaveChanges();
 
                 // Notify
-                await _communicationHubContext.Clients.All.ReceiveMessage("", $"{plant.Name} plant created");
+                //await _communicationHubContext.Clients.All.ReceiveMessage("", $"{plant.Name} plant created");
 
                 // Return result
                 return CreatedAtAction(nameof(Get), plant);

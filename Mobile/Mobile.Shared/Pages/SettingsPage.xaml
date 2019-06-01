@@ -15,47 +15,19 @@
                 <!--Form-->
                 <StackLayout Spacing="10">
                     <!--Server Ip-->
-                    <Label Text="{extensions:Translate Key=ServerIp}" TextColor="{StaticResource ColorDark}"/>
+                    <Label TextColor="{StaticResource ColorDark}"/>
                     <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
                                         TextColor="{StaticResource ColorPrimary}" 
                                         PlaceholderColor="{StaticResource ColorPrimary}" 
                                         BackgroundColor="{StaticResource ColorAccent}" 
                                         Placeholder="0.0.0.0"/>
-                    <!--Farm Bot Ip-->
-                    <Label Text="{extensions:Translate Key=FarmBotIp}" TextColor="{StaticResource ColorDark}"/>
+
+                    <Label TextColor="{StaticResource ColorDark}"/>
                     <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
                                         TextColor="{StaticResource ColorPrimary}" 
                                         PlaceholderColor="{StaticResource ColorPrimary}" 
                                         BackgroundColor="{StaticResource ColorAccent}" 
                                         Placeholder="0.0.0.0"/>
-                    <!--Email address-->
-                    <Label Text="{extensions:Translate Key=Email}" TextColor="{StaticResource ColorDark}"/>
-                    <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
-                                        TextColor="{StaticResource ColorPrimary}" 
-                                        PlaceholderColor="{StaticResource ColorPrimary}" 
-                                        BackgroundColor="{StaticResource ColorAccent}" 
-                                        Placeholder="email@example.com"/>
-                    <!--Username-->
-                    <Label Text="{extensions:Translate Key=Username}" TextColor="{StaticResource ColorDark}"/>
-                    <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
-                                        TextColor="{StaticResource ColorPrimary}" 
-                                        PlaceholderColor="{StaticResource ColorPrimary}" 
-                                        BackgroundColor="{StaticResource ColorAccent}" 
-                                        Placeholder="user.example"/>
-                    <!--Password-->
-                    <Label Text="{extensions:Translate Key=Password}" TextColor="{StaticResource ColorDark}"/>
-                    <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
-                                        TextColor="{StaticResource ColorPrimary}" 
-                                        PlaceholderColor="{StaticResource ColorPrimary}" 
-                                        BackgroundColor="{StaticResource ColorAccent}" 
-                                        Placeholder="*********"/>
-                    <!--Confirmation-->
-                    <Label Text="{extensions:Translate Key=Confirmation}" TextColor="{StaticResource ColorDark}"/>
-                    <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
-                                        TextColor="{StaticResource ColorPrimary}" 
-                                        PlaceholderColor="{StaticResource ColorPrimary}" 
-                                        BackgroundColor="{StaticResource ColorAccent}" 
-                                        Placeholder="*********"/>
                     
                     <!--Buttons-->
                     <FlexLayout Direction="Row" JustifyContent="End">

@@ -19,18 +19,71 @@ namespace Mobile.Shared.Pages
             NavigationPage.SetHasNavigationBar(this, false);
 
             InitializeComponent();
-
-            CrossOpenTok.Current.ApiKey = "46335352"; // OpenTok api key from your account
-            CrossOpenTok.Current.SessionId = "1_MX40NjMzNTM1Mn5-MTU1ODc0MTAyOTQ3Mn5BMXh5aWdCTUdDcFEvT2ZlT2w5QXVrZnp-UH4"; // Id of session for connecting
-            CrossOpenTok.Current.UserToken = "T1==cGFydG5lcl9pZD00NjMzNTM1MiZzaWc9MDg0Y2EyNTA1Zjk1Mzk4ZTIxZDQ5NmI1NGIzNjc4NDEyMjFhNDEzYjpzZXNzaW9uX2lkPTFfTVg0ME5qTXpOVE0xTW41LU1UVTFPRGMwTVRBeU9UUTNNbjVCTVhoNWFXZENUVWREY0ZFdlQyWmxUMnc1UVhWclpucC1VSDQmY3JlYXRlX3RpbWU9MTU1ODc0MTAyNSZub25jZT02NzYwMTImcm9sZT1QVUJMSVNIRVI="; // User's token
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void ForwardButton_Pressed(object sender, EventArgs e)
         {
-            if (!CrossOpenTok.Current.TryStartSession())
-            {
-                return;
-            }
+            ViewModel.ForwardCommand.Execute();
+        }
+
+        private void LeftButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.LeftCommand.Execute();
+        }
+
+        private void ForwardButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.StopCommand.Execute();
+        }
+
+        private void LeftButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.StopCommand.Execute();
+        }
+
+        private void RightButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.RightCommand.Execute();
+        }
+
+        private void RightButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.StopCommand.Execute();
+        }
+
+        private void BackButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.BackwardCommand.Execute();
+        }
+
+        private void BackButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.StopCommand.Execute();
+        }
+
+        private void HomeButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.HomeCommand.Execute();
+        }
+
+        private void DownButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.StopCommand.Execute();
+        }
+
+        private void DownButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.DownCommand.Execute();
+        }
+
+        private void UpButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.StopCommand.Execute();
+        }
+
+        private void UpButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.UpCommand.Execute();
         }
     }
 }
