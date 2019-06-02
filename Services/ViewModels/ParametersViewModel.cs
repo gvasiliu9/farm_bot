@@ -3,6 +3,7 @@ using Entites;
 using Microsoft.AspNetCore.SignalR;
 using MvvmCross.Commands;
 using Services.Abstractions;
+using Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -113,7 +114,7 @@ namespace Services.ViewModels
             {
                 // Get farmbot
                 FarmBot = await _farmBotService
-                    .GetByIdAsync(Guid.Parse("99d9742b-1ee2-45c9-a9fb-8742baa3bb86"));
+                    .GetByIdAsync(TempData.FarmBotId);
 
                 // Get farmbot sensors parameters
                 Parameters = await _parametersService
@@ -121,7 +122,7 @@ namespace Services.ViewModels
 
                 // Get farmbot settings
                 Settings farmBotSettings = await _settingsService
-                    .GetByIdAsync(Guid.Parse("74cba66d-d231-4b70-8363-ec4a2ce4ce07"));
+                    .GetByIdAsync(TempData.FarmBotId);
 
                 // Get plant
                 Plant = await _plantService.GetByIdAsync(farmBotSettings.PlantId);

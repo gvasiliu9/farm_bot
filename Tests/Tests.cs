@@ -17,7 +17,8 @@ namespace Tests.Services
             {
                 Id = Globals.FarmBotId,
                 Name = "Utm FarmBot",
-                IpAddress = "192.168.1.1"
+                IpAddress = "192.168.1.1",
+                IpCameraAddress = "192.168.1.1"
             };
 
             await Globals.FarmBotService.AddAsync(farmBot);
@@ -29,9 +30,9 @@ namespace Tests.Services
                 Name = "Carot",
                 Info = "Info",
                 RowDistance = 25,
+                PlantDistance = 25,
+                SoilHumidity = 50,
                 SeedDepth = 15,
-                WaterQuanity = 250,
-                IrigationsPerDay = 5,
                 Duration = 30
             };
 
@@ -83,7 +84,7 @@ namespace Tests.Services
             Assert.NotNull(plant);
 
             // User settings
-            Settings settings = await Globals.SettingsService.GetByIdAsync(Globals.UserId);
+            Settings settings = await Globals.SettingsService.GetByIdAsync(Globals.FarmBotId);
 
             Assert.NotNull(settings);
 
@@ -103,7 +104,8 @@ namespace Tests.Services
             Assert.NotEmpty(allParameters);
 
             // FarmBot parameters
-            Parameters parameters = await Globals.ParametersService.GetByIdAsync(Globals.FarmBotId);
+            Parameters parameters = await Globals.ParametersService
+                .GetByIdAsync(Globals.FarmBotId);
 
             Assert.NotNull(parameters);
 
@@ -123,7 +125,7 @@ namespace Tests.Services
             await Globals.PlantService.UpdateAsync(plant);
 
             // User settings
-            Settings settings = await Globals.SettingsService.GetByIdAsync(Globals.UserId);
+            Settings settings = await Globals.SettingsService.GetByIdAsync(Globals.FarmBotId);
 
             Assert.NotNull(settings);
 
@@ -143,7 +145,7 @@ namespace Tests.Services
             await Globals.EventService.DeleteAsync(Globals.EventId);
 
             // User settings
-            await Globals.SettingsService.DeleteAsync(Globals.UserId);
+            await Globals.SettingsService.DeleteAsync(Globals.FarmBotId);
 
             // FarmBot parameters
             await Globals.ParametersService.DeleteAsync(Globals.FarmBotId);

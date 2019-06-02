@@ -34,7 +34,7 @@ namespace Api.Controllers
         public ActionResult<Settings> Get(Guid id)
         {
             // Get settings
-            Settings settings = _settingsRepository.FirstOrDefault(s => s.UserId == id);
+            Settings settings = _settingsRepository.FirstOrDefault(s => s.FarmBotId == id);
 
             // Check
             if (settings == null)
@@ -62,7 +62,7 @@ namespace Api.Controllers
                 _farmBotDbContext.SaveChanges();
 
                 // Return result
-                return CreatedAtAction(nameof(Get), new { id = settings.UserId }, settings);
+                return CreatedAtAction(nameof(Get), new { id = settings.FarmBotId }, settings);
             }
             catch
             {
@@ -82,7 +82,7 @@ namespace Api.Controllers
 
                 // Get settings
                 Settings settingsToUpdate = _settingsRepository.
-                    FirstOrDefault(s => s.UserId == settings.UserId);
+                    FirstOrDefault(s => s.FarmBotId == settings.FarmBotId);
 
                 // Check result
                 if (settingsToUpdate == null)
@@ -105,13 +105,14 @@ namespace Api.Controllers
             }
         }
 
-        [HttpDelete("{userId}")]
-        public ActionResult Delete(Guid userId)
+        [HttpDelete("{farmBotId}")]
+        public ActionResult Delete(Guid farmBotId)
         {
             try
             {
                 // Get settings
-                Settings settingsToRemove = _settingsRepository.FirstOrDefault(s => s.UserId == userId);
+                Settings settingsToRemove = _settingsRepository
+                    .FirstOrDefault(s => s.FarmBotId == farmBotId);
 
                 // Check
                 if (settingsToRemove == null)

@@ -1,6 +1,9 @@
 ﻿using Acr.UserDialogs;
+using Entites;
 using Microsoft.AspNetCore.SignalR.Client;
 using MvvmCross.Commands;
+using Services.Abstractions;
+using Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +31,23 @@ namespace Services.ViewModels
 
         #endregion
 
+        #region Bindable Properties
+
+        private string _ipCameraAddress;
+        public string IpCameraAddress
+        {
+            get => _ipCameraAddress;
+            set
+            {
+                SetProperty(ref _ipCameraAddress, value);
+            }
+        }
+
+        #endregion
+
         #region Services
+
+        private readonly IFarmBotService _farmBotService;
 
         #endregion
 
@@ -52,9 +71,11 @@ namespace Services.ViewModels
 
         #endregion
 
-        public RealtimeViewModel(IUserDialogs userDialogs)
+        public RealtimeViewModel(IUserDialogs userDialogs
+            , IFarmBotService farmBotService)
         {
             UserDialogs = userDialogs;
+            _farmBotService = farmBotService;
 
             LeftCommand = new MvxAsyncCommand(Left);
             ForwardCommand = new MvxAsyncCommand(Forward);
@@ -72,24 +93,26 @@ namespace Services.ViewModels
         {
             await base.Initialize();
 
+            IsBusy();
+
             // Connect to communication hub
             try
             {
-                _communicationHubConnection = new HubConnectionBuilder()
-                    .WithUrl("https://farmbotapi.azurewebsites.net/communicationhub")
-                    .Build();
+                _communicationHubConnection = CommunicationHub.Connect();
 
                 await _communicationHubConnection.StartAsync();
-
-                //_communicationHubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-                //{
-                //    UserDialogs.Toast(message);
-                //});
             }
             catch (Exception ex)
             {
                 UserDialogs.Toast(ex.Message);
             }
+
+            // Get ip camera address
+            FarmBot farmBot = await _farmBotService.GetByIdAsync(TempData.FarmBotId);
+
+            IpCameraAddress = farmBot.IpCameraAddress;
+
+            IsBusy(false);
         }
 
         private async Task Left()

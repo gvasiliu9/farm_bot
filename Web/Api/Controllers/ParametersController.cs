@@ -35,7 +35,8 @@ namespace Api.Controllers
         public ActionResult<Parameters> Get(Guid id)
         {
             // Get CurrentParameters
-            Parameters parameters = _parametersRepository.FirstOrDefault(p => p.FarmBotId == id);
+            Parameters parameters = _parametersRepository
+                .FirstOrDefault(p => p.FarmBotId == id);
 
             // Check
             if (parameters == null)
@@ -78,7 +79,8 @@ namespace Api.Controllers
             try
             {
                 // Get CurrentParameters
-                Parameters parametersToUpdate = _parametersRepository.GetById(CurrentParameters.Id);
+                Parameters parametersToUpdate = _parametersRepository
+                    .GetById(CurrentParameters.FarmBotId);
 
                 // Check
                 if (parametersToUpdate == null)
@@ -92,6 +94,7 @@ namespace Api.Controllers
                 parametersToUpdate.FarmBotId = parametersToUpdate.FarmBotId;
                 parametersToUpdate.Luminosity = parametersToUpdate.Luminosity;
                 parametersToUpdate.SoilHumidity = parametersToUpdate.SoilHumidity;
+                parametersToUpdate.SeededPlants = parametersToUpdate.SeededPlants;
                 parametersToUpdate.Updated = DateTime.Now;
 
                 // Save

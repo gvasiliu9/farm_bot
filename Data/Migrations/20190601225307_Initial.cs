@@ -29,7 +29,12 @@ namespace Data.Migrations
                     Created = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
                     Updated = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
                     Name = table.Column<string>(maxLength: 75, nullable: true),
-                    IpAddress = table.Column<string>(maxLength: 15, nullable: true)
+                    IpAddress = table.Column<string>(maxLength: 15, nullable: true),
+                    IpCameraAddress = table.Column<string>(maxLength: 50, nullable: true),
+                    LastX = table.Column<int>(nullable: false),
+                    LastY = table.Column<int>(nullable: false),
+                    Width = table.Column<int>(nullable: false),
+                    Length = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,9 +51,9 @@ namespace Data.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Info = table.Column<string>(maxLength: 250, nullable: true),
                     RowDistance = table.Column<int>(nullable: false),
+                    PlantDistance = table.Column<int>(nullable: false),
                     SeedDepth = table.Column<short>(nullable: false),
-                    WaterQuanity = table.Column<byte>(nullable: false),
-                    IrigationsPerDay = table.Column<byte>(nullable: false),
+                    SoilHumidity = table.Column<byte>(nullable: false),
                     Duration = table.Column<short>(nullable: false)
                 },
                 constraints: table =>
@@ -65,7 +70,8 @@ namespace Data.Migrations
                     FarmBotId = table.Column<Guid>(nullable: false),
                     Luminosity = table.Column<byte>(nullable: false),
                     AirTemperature = table.Column<byte>(nullable: false),
-                    SoilHumidity = table.Column<byte>(nullable: false)
+                    SoilHumidity = table.Column<byte>(nullable: false),
+                    SeededPlants = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,5 +1,7 @@
 ﻿using Entites;
 using Microsoft.AspNetCore.SignalR.Client;
+using Services;
+using Services.Helpers;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -20,17 +22,23 @@ namespace ControlUnit
 
         private static SerialPort _YPort;
 
-        private static int _lastX = 5000;
+        private static int _lastX;
 
-        private static int _lastY = 0;
+        private static int _lastY;
 
         private static int _delay = 1000;
 
-        private static int _platsForSeeding = 10;
+        private static int _platsForSeeding = 3;
 
         private static int _botWidth = 13000;
 
-        private static int _botLength = 37000;
+        private static int _botLength = 32000;
+
+        private static bool _isFull;
+
+        private static FarmBot _farmBot; 
+
+        private static FarmBotService _farmBotService;
 
         private enum SerialPortMessage
         {
@@ -75,11 +83,33 @@ namespace ControlUnit
             // Connect
             Task.Run(Connect);
 
+            // Get current parameters
+            _farmBotService = new FarmBotService();
+
+            // Get farm bot
+            Task.Run(GetFarmBot);
+
             // End
             Console.ReadLine();
         }
 
         #region Commands
+
+        private static async Task GetFarmBot()
+        {
+            try
+            {
+                _farmBot = await _farmBotService
+                    .GetByIdAsync(TempData.FarmBotId);
+
+                _lastX = _farmBot.LastX;
+                _lastY = _farmBot.LastY;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
 
         private static async Task Connect()
         {
@@ -243,6 +273,10 @@ namespace ControlUnit
         /// <param name="plant"></param>
         private static void SeedingCommand(Plant plant)
         {
+            // Check if is not full
+            if (_isFull)
+                return;
+
             // Reset motors
             RemoteControlCommand(Direction.Home);
 
@@ -257,15 +291,33 @@ namespace ControlUnit
             int plantX;
             int plantY;
 
-            int rowDistance = 3000;
-            int plantDistance = 3000;
-            int seedDepth = 7500;
+            // Convert cm to impulses
+            int rowDistance = plant.RowDistance * 190;
+            int plantDistance = plant.PlantDistance * 150;
+            int seedDepth = plant.SeedDepth * 380;
 
-            for (int i = 0; i < _platsForSeeding; i ++)
+            // Check bounds
+            if (_lastX == 0)
+            {
+                _XPort.Write(Forward(rowDistance / 2));
+
+                WaitX();
+            }
+
+            // Seed
+            for (int i = 0; i < _platsForSeeding; i++)
             {
                 plantY = _lastY + plantDistance;
                 plantX = _lastX;
 
+                // Check bounds
+                if (plantX + (1.5 * rowDistance) > _botLength)
+                {
+                    _isFull = true;
+                    break;
+                }
+
+                // Seed
                 if((plantY + (0.5 * plantDistance)) <= _botWidth)
                 {
                     SeedPlant(rowDistance, plantDistance, seedDepth);
@@ -282,6 +334,14 @@ namespace ControlUnit
                 }
             }
 
+            // Save last position on database
+            Task.Run(async() => {
+                _farmBot.LastX = _lastX;
+                _farmBot.LastY = _lastY;
+
+                await _farmBotService.UpdateAsync(_farmBot);
+            });
+
             // Reset motors
             Delay(2500);
 
@@ -293,6 +353,10 @@ namespace ControlUnit
             // Continue
             if (!isNewRow)
             {
+                // If is first plant
+                if (_lastY == 0)
+                    impulsesY = impulsesY / 2;
+
                 _YPort.Write(Right(impulsesY));
 
                 WaitY();
@@ -430,8 +494,17 @@ namespace ControlUnit
         {
             string result = null;
 
-            while (string.IsNullOrEmpty(result))
-                result = serialPort.ReadLine();
+            try
+            {
+                while (string.IsNullOrEmpty(result))
+                    result = serialPort.ReadLine();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             return result;
         }

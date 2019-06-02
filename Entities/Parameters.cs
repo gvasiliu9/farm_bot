@@ -18,5 +18,7 @@ namespace Entites
         public byte AirTemperature { get; set; }
 
         public byte SoilHumidity { get; set; }
+
+        public int SeededPlants { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using Services.Abstractions;
+using Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,9 +82,7 @@ namespace Services.ViewModels
             // Connect to communication hub
             try
             {
-                _communicationHubConnection = new HubConnectionBuilder()
-                    .WithUrl("https://farmbotapi.azurewebsites.net/communicationhub")
-                    .Build();
+                _communicationHubConnection = CommunicationHub.Connect();
 
                 await _communicationHubConnection.StartAsync();
             }
@@ -116,12 +115,12 @@ namespace Services.ViewModels
             try
             {
                 // Update settings
-                Settings userSettings = await _settingService
-                    .GetByIdAsync(Guid.Parse("74cba66d-d231-4b70-8363-ec4a2ce4ce07"));
+                Settings farmBotSettings = await _settingService
+                    .GetByIdAsync(TempData.FarmBotId);
 
-                userSettings.PlantId = SelectedItem.Id;
+                farmBotSettings.PlantId = SelectedItem.Id;
 
-                await _settingService.UpdateAsync(userSettings);
+                await _settingService.UpdateAsync(farmBotSettings);
 
                 // Start seeding process
                 await _communicationHubConnection.InvokeAsync("Seeding", SelectedItem);

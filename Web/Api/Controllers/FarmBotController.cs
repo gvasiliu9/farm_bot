@@ -92,6 +92,11 @@ namespace Api.Controllers
                 // Update
                 farmBotToUpdate.IpAddress = farmBot.IpAddress;
                 farmBotToUpdate.Name = farmBot.Name;
+                farmBotToUpdate.IpCameraAddress = farmBot.IpCameraAddress;
+                farmBotToUpdate.LastX = farmBot.LastX;
+                farmBotToUpdate.LastY = farmBot.LastY;
+                farmBotToUpdate.Width = farmBot.Width;
+                farmBotToUpdate.Length = farmBot.Length;
                 farmBotToUpdate.Updated = DateTime.Now;
 
                 // Save

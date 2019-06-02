@@ -18,77 +18,76 @@ namespace Services.ViewModels
 {
     public class AddPlantViewModel : BaseViewModel
     {
-        #region Fields
-
-        private Plant _plant;
-
-        private PlantValidator _validator;
-
-        #endregion
-
-        #region Properties
+        #region Bindable Properties
 
         private string _name;
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value);
-        }
-
-        private string _title;
-        public string Title
-        {
-            get => _title;
-            set => SetProperty(ref _title, value);
+            set
+            {
+                SetProperty(ref _name, value);
+            }
         }
 
         private string _info;
         public string Info
         {
             get => _info;
-            set => SetProperty(ref _info, value);
+            set
+            {
+                SetProperty(ref _info, value);
+            }
         }
 
         private int _rowDistance;
         public int RowDistance
         {
             get => _rowDistance;
-            set => SetProperty(ref _rowDistance, value);
+            set
+            {
+                SetProperty(ref _rowDistance, value);
+            }
+        }
+
+        private int _plantDistance;
+        public int PlantDistance
+        {
+            get => _plantDistance;
+            set
+            {
+                SetProperty(ref _plantDistance, value);
+            }
         }
 
         private short _seedDepth;
         public short SeedDepth
         {
             get => _seedDepth;
-            set => SetProperty(ref _seedDepth, value);
+            set
+            {
+                SetProperty(ref _seedDepth, value);
+            }
         }
 
-        private byte _waterQuantity;
-        public byte WaterQuantity
+        private byte _soilHumidity;
+        public byte SoilHumidity
         {
-            get => _waterQuantity;
-            set => SetProperty(ref _waterQuantity, value);
-        }
-
-        private byte _irigationsPerDay;
-        public byte IrigationsPerDay
-        {
-            get => _irigationsPerDay;
-            set => SetProperty(ref _irigationsPerDay, value);
+            get => _soilHumidity;
+            set
+            {
+                SetProperty(ref _soilHumidity, value);
+            }
         }
 
         private short _duration;
         public short Duration
         {
             get => _duration;
-            set => SetProperty(ref _duration, value);
-        }
-
-        private bool _isValid;
-        public bool IsValid
-        {
-            get => _isValid;
-            set => SetProperty(ref _isValid, value);
+            set
+            {
+                SetProperty(ref _duration, value);
+            }
         }
 
         #endregion
@@ -105,10 +104,6 @@ namespace Services.ViewModels
 
         private readonly IPlantService _plantService;
 
-        private readonly IUserDialogs _userDialogs;
-
-        private readonly IMvxNavigationService _navigationService;
-
         #endregion
 
         public AddPlantViewModel(IPlantService plantService, IUserDialogs userDialogs)
@@ -116,8 +111,6 @@ namespace Services.ViewModels
             UserDialogs = userDialogs;
 
             _plantService = plantService;
-
-            _validator = new PlantValidator();
 
             AddCommand = new MvxCommand(async () => await Add());
 
@@ -133,8 +126,19 @@ namespace Services.ViewModels
                 // Loading
                 IsBusy();
 
+                var plant = new Plant
+                {
+                    Name = _name,
+                    Info = _info,
+                    RowDistance = _rowDistance,
+                    PlantDistance = _plantDistance,
+                    SeedDepth = _seedDepth,
+                    SoilHumidity = _soilHumidity,
+                    Duration = _duration
+                };
+
                 // Add plant
-                await _plantService.AddAsync(_plant);
+                await _plantService.AddAsync(plant);
 
                 // Success
                 UserDialogs.Toast(I18N.Current["ItemAdded"]);
@@ -153,26 +157,6 @@ namespace Services.ViewModels
         }
 
         #region Events
-
-        public override Task RaisePropertyChanged([CallerMemberName] string whichProperty = "")
-        {
-            // Create plant
-            _plant = new Plant
-            {
-                Name = Name,
-                Info = Info,
-                RowDistance = RowDistance,
-                SeedDepth = SeedDepth,
-                WaterQuanity = WaterQuantity,
-                IrigationsPerDay = IrigationsPerDay,
-                Duration = Duration
-            };
-
-            // Validate
-            IsValid = _validator.Validate(_plant).IsValid;
-
-            return base.RaisePropertyChanged(whichProperty);
-        }
 
         #endregion
 

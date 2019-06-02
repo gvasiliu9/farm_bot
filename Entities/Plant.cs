@@ -17,11 +17,11 @@ namespace Entites
 
         public int RowDistance { get; set; }
 
+        public int PlantDistance { get; set; }
+
         public short SeedDepth { get; set; }
 
-        public byte WaterQuanity { get; set; }
-
-        public byte IrigationsPerDay { get; set; }
+        public byte SoilHumidity { get; set; }
 
         public short Duration { get; set; }
     }

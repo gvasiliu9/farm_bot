@@ -8,7 +8,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"             
     xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
-    xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
     mvx:Bi.nd="Title Translate[RealTimeVideo]"
     x:Class="Mobile.Shared.Pages.RealtimeVideoPage">
     <ContentPage.Content>
@@ -28,7 +27,7 @@
                 <WebView
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="CenterAndExpand" 
-                    Source="http://192.168.137.9:4747/video"/>
+                    mvx:Bi.nd="Source IpCameraAddress"/>
 
                 <!--Controls-->
                 <controls:Label 
@@ -53,8 +52,8 @@
                     <Button 
                         x:Name="forwardButton"
                         Grid.Row="0" 
-                        Grid.Column="1" 
-                        Text="Forward"
+                        Grid.Column="1"
+                        mvx:Bi.nd="Text Translate[Forward]"
                         Released="ForwardButton_Released"
                         Pressed="ForwardButton_Pressed"
                         Style="{StaticResource SuccessButton}"/>
@@ -62,7 +61,7 @@
                         x:Name="leftButton"
                         Grid.Row="1"
                         Grid.Column="0" 
-                        Text="Left"
+                        mvx:Bi.nd="Text Translate[Left]"
                         Released="LeftButton_Released"
                         Pressed="LeftButton_Pressed"
                         Style="{StaticResource SuccessButton}"/>
@@ -70,14 +69,14 @@
                         x:Name="homeButton"
                         Grid.Row="1" 
                         Grid.Column="1" 
-                        Text="Home"
+                        mvx:Bi.nd="Text Translate[Home]"
                         Pressed="HomeButton_Pressed"
                         Style="{StaticResource DangerButton}"/>
                     <Button
                         x:Name="rightButton"
                         Grid.Row="1" 
                         Grid.Column="2" 
-                        Text="Right"
+                        mvx:Bi.nd="Text Translate[Right]"
                         Released="RightButton_Released"
                         Pressed="RightButton_Pressed"
                         Style="{StaticResource SuccessButton}"/>
@@ -85,7 +84,7 @@
                         x:Name="backButton"
                         Grid.Row="2" 
                         Grid.Column="1" 
-                        Text="Back"
+                        mvx:Bi.nd="Text Translate[Back]"
                         Released="BackButton_Released"
                         Pressed="BackButton_Pressed"
                         Style="{StaticResource SuccessButton}"/>
@@ -93,7 +92,7 @@
                         x:Name="upButton"
                         Grid.Row="0" 
                         Grid.Column="0" 
-                        Text="Up"
+                        mvx:Bi.nd="Text Translate[Up]"
                         Released="UpButton_Released"
                         Pressed="UpButton_Pressed"
                         Style="{StaticResource PrimaryButton}"/>
@@ -103,7 +102,7 @@
                         Grid.Column="2"
                         Pressed="DownButton_Pressed"
                         Released="DownButton_Released"
-                        Text="Down"
+                        mvx:Bi.nd="Text Translate[Down]"
                         Style="{StaticResource PrimaryButton}"/>
                     
                 </Grid>

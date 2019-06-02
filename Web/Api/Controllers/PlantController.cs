@@ -109,8 +109,6 @@ namespace Api.Controllers
                 plantToUpdate.Info = plant.Info;
                 plantToUpdate.RowDistance = plant.RowDistance;
                 plantToUpdate.SeedDepth = plant.SeedDepth;
-                plantToUpdate.WaterQuanity = plant.WaterQuanity;
-                plantToUpdate.IrigationsPerDay = plant.IrigationsPerDay;
                 plantToUpdate.Duration = plant.Duration;
                 plantToUpdate.Updated = DateTime.Now;
 

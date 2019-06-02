@@ -1,42 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
-             xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
-             xmlns:extensions="clr-namespace:Mobile.Shared.Extensions"
-             xmlns:formControls="clr-namespace:Mobile.Shared.Pages.Controls.Forms"
-             x:Class="Mobile.Shared.Pages.SettingsPage">
+<views:MvxContentPage
+    x:TypeArguments="viewModels:SettingsViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Services.ViewModels;assembly=Services"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+    xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+    xmlns:formControls="clr-namespace:Mobile.Shared.Pages.Controls.Forms"
+    mvx:Bi.nd="Title Translate[Settings]"
+    x:Class="Mobile.Shared.Pages.SettingsPage">
     <ContentPage.Content>
-        <ContentView ControlTemplate="{StaticResource defaultTemplate}">
-            <StackLayout Spacing="10" Padding="0, 0, 0, 30">
+        <ContentView 
+            ControlTemplate="{StaticResource defaultTemplate}">
+            <StackLayout 
+                Spacing="10" 
+                Padding="0, 0, 0, 30">
                 <!--Page label-->
-                <controls:Label Text="{extensions:Translate Key=SettingsLabel}" Icon="{x:Static helpers:Icons.settings}"/>
+                <controls:Label 
+                    mvx:Bi.nd="Text Translate[SettingsLabel]" 
+                    Icon="{x:Static helpers:Icons.settings}"/>
 
-                <!--Form-->
+                <!--IpCamera Address-->
                 <StackLayout Spacing="10">
-                    <!--Server Ip-->
-                    <Label TextColor="{StaticResource ColorDark}"/>
-                    <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
-                                        TextColor="{StaticResource ColorPrimary}" 
-                                        PlaceholderColor="{StaticResource ColorPrimary}" 
-                                        BackgroundColor="{StaticResource ColorAccent}" 
-                                        Placeholder="0.0.0.0"/>
-
-                    <Label TextColor="{StaticResource ColorDark}"/>
-                    <formControls:Entry BorderColor="{StaticResource ColorSecondary}" 
-                                        TextColor="{StaticResource ColorPrimary}" 
-                                        PlaceholderColor="{StaticResource ColorPrimary}" 
-                                        BackgroundColor="{StaticResource ColorAccent}" 
-                                        Placeholder="0.0.0.0"/>
                     
-                    <!--Buttons-->
-                    <FlexLayout Direction="Row" JustifyContent="End">
-                        <Button FlexLayout.Basis="35%" Text="{extensions:Translate Key=Cancel}" Margin="0, 0, 10, 0" Style="{StaticResource DangerButton}"/>
-                        <Button FlexLayout.Basis="35%" Text="{extensions:Translate Key=Update}" Style="{StaticResource SuccessButton}"/>
-                    </FlexLayout>
-                </StackLayout>
+                    <Label 
+                        mvx:Bi.nd="Text Translate[IpCameraAddress]" 
+                        TextColor="{StaticResource ColorDark}"/>
+                    
+                    <formControls:Entry
+                        Keyboard="Url"
+                        mvx:Bi.nd="Text IpCameraAddress, Mode=TwoWay"
+                        BorderColor="{StaticResource ColorSecondary}" 
+                        TextColor="{StaticResource ColorPrimary}" 
+                        PlaceholderColor="{StaticResource ColorPrimary}" 
+                        BackgroundColor="{StaticResource ColorAccent}" 
+                        Placeholder="0.0.0.0"/>
 
+                    <!--Farm bot name-->
+                    <Label 
+                        mvx:Bi.nd="Text Translate[FarmBotName]" 
+                        TextColor="{StaticResource ColorDark}"/>
+
+                    <formControls:Entry
+                        Keyboard="Url"
+                        mvx:Bi.nd="Text FarmBotName, Mode=TwoWay"
+                        BorderColor="{StaticResource ColorSecondary}" 
+                        TextColor="{StaticResource ColorPrimary}" 
+                        PlaceholderColor="{StaticResource ColorPrimary}" 
+                        BackgroundColor="{StaticResource ColorAccent}" 
+                        Placeholder="0.0.0.0"/>
+
+                    <!--Farm bot ip address-->
+                    <Label 
+                        mvx:Bi.nd="Text Translate[FarmBotIp]" 
+                        TextColor="{StaticResource ColorDark}"/>
+                    
+                    <formControls:Entry
+                        Keyboard="Url"
+                        mvx:Bi.nd="Text FarmBotIp, Mode=TwoWay"
+                        BorderColor="{StaticResource ColorSecondary}" 
+                        TextColor="{StaticResource ColorPrimary}" 
+                        PlaceholderColor="{StaticResource ColorPrimary}" 
+                        BackgroundColor="{StaticResource ColorAccent}" 
+                        Placeholder="0.0.0.0"/>
+
+                    <!--Buttons-->
+                    <FlexLayout 
+                        Direction="Row" 
+                        JustifyContent="End">
+                        <Button 
+                            FlexLayout.Basis="35%"
+                            mvx:Bi.nd="Command CancelCommand; Text Translate[Cancel]"
+                            Margin="0, 0, 10, 0"
+                            Style="{StaticResource DangerButton}"/>
+                        <Button 
+                            FlexLayout.Basis="35%" 
+                            mvx:Bi.nd="Command UpdateCommand; Text Translate[Update]"
+                            Style="{StaticResource SuccessButton}"/>
+                    </FlexLayout>
+                    
+                </StackLayout>
             </StackLayout>
         </ContentView>
     </ContentPage.Content>
-</ContentPage>
+</views:MvxContentPage>

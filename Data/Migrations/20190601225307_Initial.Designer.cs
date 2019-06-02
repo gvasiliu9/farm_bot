@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(FarmBotDbContext))]
-    [Migration("20190509155324_Initial")]
+    [Migration("20190601225307_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,12 +52,23 @@ namespace Data.Migrations
                     b.Property<string>("IpAddress")
                         .HasMaxLength(15);
 
+                    b.Property<string>("IpCameraAddress")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("LastX");
+
+                    b.Property<int>("LastY");
+
+                    b.Property<int>("Length");
+
                     b.Property<string>("Name")
                         .HasMaxLength(75);
 
                     b.Property<DateTime>("Updated")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("getdate()");
+
+                    b.Property<int>("Width");
 
                     b.HasKey("Id");
 
@@ -83,6 +94,8 @@ namespace Data.Migrations
 
                     b.Property<byte>("Luminosity");
 
+                    b.Property<int>("SeededPlants");
+
                     b.Property<byte>("SoilHumidity");
 
                     b.HasKey("Id");
@@ -106,21 +119,21 @@ namespace Data.Migrations
                     b.Property<string>("Info")
                         .HasMaxLength(250);
 
-                    b.Property<byte>("IrigationsPerDay");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<int>("PlantDistance");
 
                     b.Property<int>("RowDistance");
 
                     b.Property<short>("SeedDepth");
 
+                    b.Property<byte>("SoilHumidity");
+
                     b.Property<DateTime>("Updated")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("getdate()");
-
-                    b.Property<byte>("WaterQuanity");
 
                     b.HasKey("Id");
 

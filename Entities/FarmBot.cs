@@ -13,5 +13,16 @@ namespace Entites
 
         [MaxLength(15)]
         public string IpAddress { get; set; }
+
+        [MaxLength(50)]
+        public string IpCameraAddress { get; set; }
+
+        public int LastX{ get; set; }
+
+        public int LastY{ get; set; }
+
+        public int Width{ get; set; }
+
+        public int Length{ get; set; }
     }
 }

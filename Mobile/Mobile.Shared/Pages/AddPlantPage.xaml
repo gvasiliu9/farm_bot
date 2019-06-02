@@ -9,7 +9,7 @@
     xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
     xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
     xmlns:formControls="clr-namespace:Mobile.Shared.Pages.Controls.Forms"
-    mvx:Bi.nd="Title Translate[PlantParameters]"
+    mvx:Bi.nd="Title Translate[AddPlant]"
     x:Class="Mobile.Shared.Pages.AddPlantPage">
     <!--Content-->
     <ContentPage.Content>
@@ -47,6 +47,18 @@
                         BackgroundColor="{StaticResource ColorAccent}" 
                         Placeholder="cm"
                         mvx:Bi.nd="Text RowDistance, Mode=TwoWay"/>
+                    <!--Plants distance-->
+                    <Label 
+                        mvx:Bi.nd="Text Translate[PlantsDistance]"
+                        TextColor="{StaticResource ColorDark}"/>
+                    <formControls:Entry
+                        Keyboard="Numeric"
+                        BorderColor="{StaticResource ColorSecondary}" 
+                        TextColor="{StaticResource ColorPrimary}" 
+                        PlaceholderColor="{StaticResource ColorPrimary}" 
+                        BackgroundColor="{StaticResource ColorAccent}" 
+                        mvx:Bi.nd="Text PlantDistance, Mode=TwoWay"
+                        Placeholder="cm"/>
                     <!--Seed depth-->
                     <Label 
                         mvx:Bi.nd="Text Translate[SeedDepth]"
@@ -59,9 +71,9 @@
                         BackgroundColor="{StaticResource ColorAccent}" 
                         Placeholder="cm"
                         mvx:Bi.nd="Text SeedDepth, Mode=TwoWay"/>
-                    <!--Water quantity-->
+                    <!--Soil humidity-->
                     <Label 
-                        mvx:Bi.nd="Text Translate[WaterQuantity]"
+                        mvx:Bi.nd="Text Translate[SoilHumidity]"
                         TextColor="{StaticResource ColorDark}"/>
                     <formControls:Entry
                         Keyboard="Numeric"
@@ -69,10 +81,11 @@
                         TextColor="{StaticResource ColorPrimary}" 
                         PlaceholderColor="{StaticResource ColorPrimary}" 
                         BackgroundColor="{StaticResource ColorAccent}" 
-                        mvx:Bi.nd="Text WaterQuantity, Mode=TwoWay; Placeholder Translate[Liters]"/>
-                    <!--Irigations per day-->
+                        mvx:Bi.nd="Text SoilHumidity, Mode=TwoWay"
+                        Placeholder="%"/>
+                    <!--Duration-->
                     <Label 
-                        mvx:Bi.nd="Text Translate[IrigationsPerDay]"
+                        mvx:Bi.nd="Text Translate[Duration]"
                         TextColor="{StaticResource ColorDark}"/>
                     <formControls:Entry
                         Keyboard="Numeric"
@@ -80,7 +93,8 @@
                         TextColor="{StaticResource ColorPrimary}" 
                         PlaceholderColor="{StaticResource ColorPrimary}" 
                         BackgroundColor="{StaticResource ColorAccent}" 
-                        mvx:Bi.nd="Text IrigationsPerDay, Mode=TwoWay; Placeholder Translate[Days]"/>
+                        mvx:Bi.nd="Text Duration, Mode=TwoWay; Placeholder Translate[Days]"
+                        Placeholder=""/>
                     <!--Info-->
                     <Label 
                         mvx:Bi.nd="Text Translate[Info]" 
@@ -103,7 +117,7 @@
                             Margin="10, 0, 0, 0"
                             FlexLayout.Basis="35%" 
                             Style="{StaticResource SuccessButton}"
-                            mvx:Bi.nd="Command AddCommand; Text Translate[Add]; IsVisible IsValid"/>
+                            mvx:Bi.nd="Command AddCommand; Text Translate[Add]"/>
                     </FlexLayout>
                 </StackLayout>
             </StackLayout>

@@ -47,16 +47,6 @@ namespace Services.ViewModels
             AddPlantCommand = new MvxCommand(async () => await AddPlant());
 
             SelectPlantCommand = new MvxCommand(async () => await SelectPlant());
-
-            // Get plants count
-            //Task.Run(async () =>
-            //{
-            //    IsBusy();
-
-            //    Count = "" + _plantService.GetAllAsync().Result.ToList().Count();
-
-            //    IsBusy(false);
-            //});
         }
 
         #region Methods
