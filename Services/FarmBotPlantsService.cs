@@ -5,66 +5,63 @@ using Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Services
 {
-    public class FarmBotService : IFarmBotService
-    { 
+    public class FarmBotPlantsService : IFarmBotPlantsService
+    {
         private readonly IHttpRequest _httpRequest;
 
-        public FarmBotService()
+        public FarmBotPlantsService()
         {
             _httpRequest = new HttpRequest();
         }
 
-        public async Task AddAsync(FarmBot farmBot)
+        public async Task AddAsync(FarmBotPlant farmBotEvent)
         {
-            string url = $"{Endpoints.FarmBot}";
+            string url = $"{Endpoints.FarmBotPlants}";
 
-            HttpResponseMessage httpResponeMessage = await _httpRequest.PostAsync(url, farmBot);
+            HttpResponseMessage httpResponeMessage = await _httpRequest.PostAsync(url, farmBotEvent);
 
             httpResponeMessage.EnsureSuccessStatusCode();
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            string url = $"{Endpoints.FarmBot}/{id}";
+            string url = $"{Endpoints.FarmBotPlants}/{id}";
 
             HttpResponseMessage httpResponeMessage = await _httpRequest.DeleteAsync(url);
 
             httpResponeMessage.EnsureSuccessStatusCode();
         }
 
-        public async Task<IEnumerable<FarmBot>> GetAllAsync()
+        public async Task<IEnumerable<FarmBotPlant>> GetAllAsync()
         {
-            string url = $"{Endpoints.FarmBot}";
+            string url = $"{Endpoints.FarmBotPlants}";
 
             HttpResponseMessage httpResponeMessage = await _httpRequest.GetAsync(url);
 
             httpResponeMessage.EnsureSuccessStatusCode();
 
-            return await httpResponeMessage.Content.ReadAsJsonAsync<IEnumerable<FarmBot>>();
+            return await httpResponeMessage.Content.ReadAsJsonAsync<IEnumerable<FarmBotPlant>>();
         }
 
-        public async Task<FarmBot> GetByIdAsync(Guid id)
+        public async Task<FarmBotPlant> GetByIdAsync(Guid farmBotId)
         {
-            string url = $"{Endpoints.FarmBot}/{id}";
+            string url = $"{Endpoints.FarmBotPlants}/{farmBotId}";
 
             HttpResponseMessage httpResponeMessage = await _httpRequest.GetAsync(url);
 
             httpResponeMessage.EnsureSuccessStatusCode();
 
-            return await httpResponeMessage.Content.ReadAsJsonAsync<FarmBot>();
+            return await httpResponeMessage.Content.ReadAsJsonAsync<FarmBotPlant>();
         }
 
-        public async Task UpdateAsync(FarmBot farmBot)
+        public Task UpdateAsync(FarmBotPlant entity)
         {
-            string url = $"{Endpoints.FarmBot}";
-
-            HttpResponseMessage httpResponeMessage = await _httpRequest.PutAsync(url, farmBot);
-
-            httpResponeMessage.EnsureSuccessStatusCode();
+            throw new NotImplementedException();
         }
     }
 }

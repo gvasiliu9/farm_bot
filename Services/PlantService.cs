@@ -1,4 +1,4 @@
-﻿using Entites;
+﻿using Entities;
 using Services.Abstractions;
 using Services.Extensions;
 using Services.Helpers;

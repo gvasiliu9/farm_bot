@@ -1,4 +1,4 @@
-﻿using Entites;
+﻿using Entities;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace Api.SignalR
 {
     public class CommunicationHub : Hub<ICommunicationHub>
     {
-        public async Task Seeding(Plant plant)
+        public async Task Seeding(Plant plant, int count)
         {
-            await Clients.All.Seeding(plant);
+            await Clients.All.Seeding(plant, count);
         }
 
         public async Task RemoteControl (string direction)

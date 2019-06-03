@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+             xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+             xmlns:navigation="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
+             x:Class="Mobile.Shared.Pages.Controls.PlantParameters">
+  <ContentView.Content>
+        <StackLayout
+            Margin="0, 10, 0, 0"
+            Spacing="10">
+            <!--Name-->
+            <controls:Label 
+                x:Name="name"/>
+
+            <!--Info-->
+            <Label
+                x:Name="info"
+                FontSize="Small" 
+                TextColor="{StaticResource ColorDark}"/>
+
+            <!--Prameters-->
+            <Grid 
+                ColumnSpacing="2" 
+                RowSpacing="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                <!--Header-->
+                <Frame 
+                    Style="{StaticResource tableHeader}">
+                    <Label 
+                        x:Name="parameterNameLabel"
+                        Style="{StaticResource tableHeaderText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="0" 
+                    Grid.Column="1"
+                    Style="{StaticResource tableHeader}">
+                    <Label 
+                        x:Name="measurementUnitLabel"
+                        Style="{StaticResource tableHeaderText}" />
+                </Frame>
+                <Frame 
+                    Grid.Row="0" 
+                    Grid.Column="2" 
+                    Style="{StaticResource tableHeader}">
+                    <Label 
+                        x:Name="value"
+                        Style="{StaticResource tableHeaderText}"/>
+                </Frame>
+                <!--RowDistance-->
+                <Frame 
+                    Grid.Row="1" 
+                    Grid.Column="0" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="rowDistanceLabel"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="1"
+                    Grid.Column="1" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="rowDistanceUnit" 
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="1"
+                    Grid.Column="2" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="rowDistance"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <!--PlantDistance-->
+                <Frame 
+                    Grid.Row="2" 
+                    Grid.Column="0" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="plantDistanceLabel"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="2"
+                    Grid.Column="1" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="plantDistanceUnit" 
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="2"
+                    Grid.Column="2" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="plantDistance"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <!--SeedDepth-->
+                <Frame 
+                    Grid.Row="3" 
+                    Grid.Column="0" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="seedDepthLabel"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="3"
+                    Grid.Column="1" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="seedDepthUnit" 
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="3"
+                    Grid.Column="2" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="seedDepth"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <!--SoilHumidity-->
+                <Frame 
+                    Grid.Row="4" 
+                    Grid.Column="0" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="soilHumidityLabel"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="4"
+                    Grid.Column="1" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        Text="%" 
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="4"
+                    Grid.Column="2" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="soilHumidity"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <!--Duration-->
+                <Frame 
+                    Grid.Row="5" 
+                    Grid.Column="0" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="durationLabel"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="5"
+                    Grid.Column="1" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="durationUnit" 
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+                <Frame 
+                    Grid.Row="5"
+                    Grid.Column="2" 
+                    Style="{StaticResource tableCell}">
+                    <Label 
+                        x:Name="duration"
+                        Style="{StaticResource tableCellText}"/>
+                </Frame>
+            </Grid>
+            <navigation:LinkButton 
+                x:Name="updateLink"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

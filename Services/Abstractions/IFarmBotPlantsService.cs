@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.Abstractions
 {
-    public interface IPlantService : IService<Plant>
+    public interface IFarmBotPlantsService : IService<FarmBotPlant>
     {
     }
 }

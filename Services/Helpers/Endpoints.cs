@@ -16,7 +16,7 @@ namespace Services.Helpers
 
         public static string FarmBot { get; } = "farmbot";
 
-        public static string Settings { get; } = "settings";
+        public static string FarmBotPlants { get; } = "farmbotplants";
 
         public static string Event { get; } = "event";
     }

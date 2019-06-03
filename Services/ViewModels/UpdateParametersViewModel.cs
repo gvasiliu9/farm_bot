@@ -16,9 +16,19 @@ using System.Threading.Tasks;
 
 namespace Services.ViewModels
 {
-    public class AddPlantViewModel : BaseViewModel
+    public class UpdateParameteresViewModel : BaseViewModel<Plant>
     {
         #region Bindable Properties
+
+        private Guid _id;
+        public Guid Id
+        {
+            get => _id;
+            set
+            {
+                SetProperty(ref _id, value);
+            }
+        }
 
         private string _name;
         public string Name
@@ -94,7 +104,7 @@ namespace Services.ViewModels
 
         #region Commands
 
-        public IMvxCommand AddCommand { get; }
+        public IMvxCommand UpdateCommand { get; }
 
         public IMvxCommand CancelCommand { get; }
 
@@ -106,20 +116,36 @@ namespace Services.ViewModels
 
         #endregion
 
-        public AddPlantViewModel(IPlantService plantService, IUserDialogs userDialogs)
+        public UpdateParameteresViewModel(IPlantService plantService, IUserDialogs userDialogs)
         {
             UserDialogs = userDialogs;
 
             _plantService = plantService;
 
-            AddCommand = new MvxCommand(async () => await Add());
+            UpdateCommand = new MvxCommand(async () => await Update());
 
             CancelCommand = new MvxCommand(async () => await Cancel());
         }
 
         #region Methods
 
-        private async Task Add()
+        public override void Prepare()
+        {
+        }
+
+        public override void Prepare(Plant plant)
+        {
+            Id = plant.Id;
+            Name = plant.Name;
+            Info = plant.Info;
+            RowDistance = plant.RowDistance;
+            PlantDistance = plant.PlantDistance;
+            SeedDepth = plant.SeedDepth;
+            SoilHumidity = plant.SoilHumidity;
+            Duration = plant.Duration;
+        }
+
+        private async Task Update()
         {
             try
             {
@@ -128,6 +154,7 @@ namespace Services.ViewModels
 
                 var plant = new Plant
                 {
+                    Id = _id,
                     Name = _name,
                     Info = _info,
                     RowDistance = _rowDistance,
@@ -138,10 +165,10 @@ namespace Services.ViewModels
                 };
 
                 // Add plant
-                await _plantService.AddAsync(plant);
+                await _plantService.UpdateAsync(plant);
 
                 // Success
-                UserDialogs.Toast(I18N.Current["ItemAdded"]);
+                UserDialogs.Toast(I18N.Current["ItemUpdated"]);
             }
             catch (Exception ex)
             {

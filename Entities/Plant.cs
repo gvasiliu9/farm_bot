@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Entites
+namespace Entities
 {
     public class Plant: BaseEntity
     {
@@ -24,5 +25,7 @@ namespace Entites
         public byte SoilHumidity { get; set; }
 
         public short Duration { get; set; }
+
+        public List<FarmBotPlant> FarmBotPlants { get; set; }
     }
 }

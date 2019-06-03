@@ -75,6 +75,21 @@ namespace Data.Migrations
                         .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("FarmBots");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("99d9742b-1ee2-45c9-a9fb-8742baa3bb86"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IpAddress = "192.168.1.112",
+                            IpCameraAddress = "http://192.168.1.1:8080/video",
+                            LastX = 0,
+                            LastY = 0,
+                            Length = 0,
+                            Name = "Utm FarmBot",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Width = 0
+                        });
                 });
 
             modelBuilder.Entity("Entites.Parameters", b =>
@@ -141,35 +156,21 @@ namespace Data.Migrations
                     b.ToTable("Plants");
                 });
 
-            modelBuilder.Entity("Entites.Settings", b =>
+            modelBuilder.Entity("Entities.FarmBotPlant", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
-
                     b.Property<Guid>("FarmBotId");
 
                     b.Property<Guid>("PlantId");
 
-                    b.Property<DateTime>("Updated")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                    b.Property<DateTime>("Created");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<DateTime>("Updated");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("FarmBotId");
+                    b.HasKey("FarmBotId", "PlantId");
 
                     b.HasIndex("PlantId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Settings");
+                    b.ToTable("FarmBotPlants");
                 });
 
             modelBuilder.Entity("Entites.Parameters", b =>
@@ -180,15 +181,15 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Entites.Settings", b =>
+            modelBuilder.Entity("Entities.FarmBotPlant", b =>
                 {
                     b.HasOne("Entites.FarmBot", "FarmBot")
-                        .WithMany()
+                        .WithMany("FarmBotPlants")
                         .HasForeignKey("FarmBotId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Entites.Plant", "Plant")
-                        .WithMany()
+                        .WithMany("FarmBotPlants")
                         .HasForeignKey("PlantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

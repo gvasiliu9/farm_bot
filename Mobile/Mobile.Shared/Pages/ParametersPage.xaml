@@ -11,74 +11,22 @@
     mvx:Bi.nd="Title Translate[Parameters]"
     x:Class="Mobile.Shared.Pages.ParametersPage">
 
-    <!--Styles-->
-    <ContentPage.Resources>
-        <!--Table header-->
-        <Style x:Key="tableHeader" TargetType="Frame">
-            <Setter Property="Padding" Value="10, 5"/>
-            <Setter Property="HasShadow" Value="False"/>
-            <Setter Property="CornerRadius" Value="0"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource ColorSecondary}"/>
-        </Style>
-        <!--Table cell-->
-        <Style x:Key="tableCell" TargetType="Frame">
-            <Setter Property="Padding" Value="10, 5"/>
-            <Setter Property="HasShadow" Value="False"/>
-            <Setter Property="CornerRadius" Value="0"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}"/>
-        </Style>
-        <!--Table header text-->
-        <Style x:Key="tableHeaderText" TargetType="Label">
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="VerticalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="Small"/>
-            <Setter Property="LineBreakMode" Value="WordWrap"/>
-        </Style>
-        <!--Table cell text-->
-        <Style x:Key="tableCellText" TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource ColorDark}"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="VerticalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="FontSize" Value="Small"/>
-            <Setter Property="LineBreakMode" Value="WordWrap"/>
-        </Style>
-    </ContentPage.Resources>
-
     <!--Content-->
     <ContentPage.Content>
         <ContentView ControlTemplate="{StaticResource defaultTemplate}">
             <!--Content-->
             <StackLayout
-                Spacing="10">
+                Spacing="20">
                 <!--Label-->
                 <controls:Label 
                     Icon="{x:Static helpers:Icons.bar_chart_2}" 
-                    mvx:Bi.nd="Text Plant.Name"/>
-
-                <!--Description-->
-                <StackLayout Spacing="0">
-                    <Label
-                        mvx:Bi.nd="Text Translate[Info]"
-                        FontSize="Small" 
-                        TextColor="{StaticResource ColorDark}"/>
-                    <Label 
-                        FontSize="Small"
-                        mvx:Bi.nd="Text Plant.Info"/>
-                </StackLayout>
+                    mvx:Bi.nd="Text Translate[FarmBotParameters]"/>
 
                 <!--Table-->
                 <Grid 
                     ColumnSpacing="2" 
                     RowSpacing="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -186,135 +134,9 @@
                             mvx:Bi.nd="Text Parameters.Luminosity" 
                             Style="{StaticResource tableCellText}"/>
                     </Frame>
-                    <!--Seeding date-->
-                    <Frame 
-                        Grid.Row="4" 
-                        Grid.Column="0" 
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[SeedingDate]"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="4" 
-                        Grid.Column="1" 
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[DateTime]"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="4" 
-                        Grid.Column="2" 
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            mvx:Bi.nd="Text SeedingDate" 
-                            Text="{Binding SowingDate}" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <!--Plants distance-->
-                    <Frame 
-                        Grid.Row="5" 
-                        Grid.Column="0" 
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[PlantsDistance]"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="5" 
-                        Grid.Column="1" 
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            Text="cm" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="5"
-                        Grid.Column="2"
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            Text="0" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <!--Row distance-->
-                    <Frame 
-                        Grid.Row="6"
-                        Grid.Column="0"
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[RowDistance]"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="6"
-                        Grid.Column="1" 
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            Text="cm" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="6"
-                        Grid.Column="2" 
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            mvx:Bi.nd="Text Plant.RowDistance"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <!--Seed depth-->
-                    <Frame 
-                        Grid.Row="7" 
-                        Grid.Column="0" 
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[SeedDepth]" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="7" 
-                        Grid.Column="1" 
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            Text="cm" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="7" 
-                        Grid.Column="2" 
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Plant.SeedDepth" 
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <!--Remaining time-->
-                    <Frame 
-                        Grid.Row="8" 
-                        Grid.Column="0" 
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[RemainingTime]"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="8" 
-                        Grid.Column="1"
-                        Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[Days]"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
-                    <Frame 
-                        Grid.Row="8" 
-                        Grid.Column="2" 
-                        Style="{StaticResource tableCell}">
-                        <Label 
-                            mvx:Bi.nd="Text RemainingTime"
-                            Style="{StaticResource tableCellText}"/>
-                    </Frame>
                     <!--Seeded plants-->
                     <Frame 
-                        Grid.Row="9" 
+                        Grid.Row="4" 
                         Grid.Column="0" 
                         Style="{StaticResource tableCell}">
                         <Label
@@ -322,27 +144,22 @@
                             Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame 
-                        Grid.Row="9" 
-                        Grid.Column="1"
+                        Grid.Row="4" 
+                        Grid.Column="1" 
                         Style="{StaticResource tableCell}">
-                        <Label
-                            mvx:Bi.nd="Text Translate[Count]"
+                        <Label 
+                            Text="Total" 
                             Style="{StaticResource tableCellText}"/>
                     </Frame>
                     <Frame 
-                        Grid.Row="9" 
+                        Grid.Row="4" 
                         Grid.Column="2" 
                         Style="{StaticResource tableCell}">
                         <Label 
-                            mvx:Bi.nd="Text Parameters.SeededPlants"
+                            mvx:Bi.nd="Text Parameters.SeededPlants" 
                             Style="{StaticResource tableCellText}"/>
                     </Frame>
                 </Grid>
-
-                <!--Update link-->
-                <navigationControls:LinkButton
-                    mvx:Bi.nd="Text Translate[UpdateParameters]"
-                    Command="{Binding UpdateParametersCommand}"/>
 
                 <!--Aditional info-->
                 <StackLayout Spacing="5">
@@ -389,7 +206,35 @@
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
+                
+                <!--Seeded plants-->
+                <StackLayout Spacing="5">
+                    <controls:Label 
+                        Icon="{x:Static helpers:Icons.bar_chart_2}" 
+                        mvx:Bi.nd="Text Translate[SeededPlantsList]"/>
 
+                    <ListView
+                        SeparatorVisibility="None"
+                        HasUnevenRows="True"
+                        SelectedItem="{Binding SelectedItem}"
+                        ItemsSource="{Binding Plants}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <controls:PlantParameters
+                                        Name="{Binding Name}"
+                                        Info="{Binding Info}"
+                                        RowDistance="{Binding RowDistance}"
+                                        PlantDistance="{Binding PlantDistance}"
+                                        SeedDepth="{Binding SeedDepth}"
+                                        SoilHumidity="{Binding SoilHumidity}"
+                                        Duration="{Binding Duration}"/>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                </StackLayout>
             </StackLayout>
         </ContentView>
     </ContentPage.Content>

@@ -1,4 +1,4 @@
-using Entites;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -38,16 +38,6 @@ namespace Tests.Services
 
             await Globals.PlantService.AddAsync(plant);
 
-            // Settings
-            var settings = new Settings
-            {
-                UserId = Globals.UserId,
-                FarmBotId = Globals.FarmBotId,
-                PlantId = Globals.PlantId,
-            };
-
-            await Globals.SettingsService.AddAsync(settings);
-
             // Parameters
             var parameters = new Parameters
             {
@@ -64,8 +54,7 @@ namespace Tests.Services
             var farmBotEvent = new Event
             {
                 Id = Globals.EventId,
-                Type = Enums.EventType.Irigation,
-                Info = ""
+                Info = "0"
             };
 
             await Globals.EventService.AddAsync(farmBotEvent);
@@ -82,11 +71,6 @@ namespace Tests.Services
             Plant plant = await Globals.PlantService.GetByIdAsync(Globals.PlantId);
 
             Assert.NotNull(plant);
-
-            // User settings
-            Settings settings = await Globals.SettingsService.GetByIdAsync(Globals.FarmBotId);
-
-            Assert.NotNull(settings);
 
             // All events
             IEnumerable<Event> events = await Globals.EventService.GetAllAsync();
@@ -108,11 +92,6 @@ namespace Tests.Services
                 .GetByIdAsync(Globals.FarmBotId);
 
             Assert.NotNull(parameters);
-
-            // All settings
-            IEnumerable<Settings> allSettings = await Globals.SettingsService.GetAllAsync();
-
-            Assert.NotEmpty(allSettings);
         }
 
         private async Task Update()
@@ -123,13 +102,6 @@ namespace Tests.Services
             Assert.NotNull(plant);
 
             await Globals.PlantService.UpdateAsync(plant);
-
-            // User settings
-            Settings settings = await Globals.SettingsService.GetByIdAsync(Globals.FarmBotId);
-
-            Assert.NotNull(settings);
-
-            await Globals.SettingsService.UpdateAsync(settings);
 
             // FarmBot
             FarmBot farmBot = await Globals.FarmBotService.GetByIdAsync(Globals.FarmBotId);
@@ -143,9 +115,6 @@ namespace Tests.Services
         {
             // Event
             await Globals.EventService.DeleteAsync(Globals.EventId);
-
-            // User settings
-            await Globals.SettingsService.DeleteAsync(Globals.FarmBotId);
 
             // FarmBot parameters
             await Globals.ParametersService.DeleteAsync(Globals.FarmBotId);

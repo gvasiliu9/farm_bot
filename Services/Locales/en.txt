@@ -6,17 +6,17 @@ Cancel=Cancel
 Close=Close
 Count=Count
 Error=Oops...
+LoginError=Incorect username or password
 Confirmation=Confirmation
 CopyRight=© UTM All Rights Reserved	
 Controls=Controls	
 Parameters=Parameteres	
-DateTime=	Date	
-Days=Days	
 Duration=Duration	
 Email=Email	
 FarmBotIp=FarmBot Ip
 FarmBotName=FarmBot Name
 ItemAdded=Item was added successfully
+ItemUpdated=Item was updated successfully
 Info=Description	
 IrigationsPerDay=Irigations per day	
 Liters=Liters	
@@ -38,7 +38,7 @@ PlantsDistance=Plants distance
 PlantsList=Plants list	
 PlantsListLabel=Total plants
 PlantsListMessage=In order to start Farm Bot processes you should select a plant from added plants. If current process is not finished then it will be interrupted and new process will begin.	
-PleaseLogin=Please login=	
+PleaseLogin=Please login	
 RealTimeVideo=Video & Controls
 RealTimeVideoLabel=Use buttons to control camera
 RemainingTime=Remaining time
@@ -54,14 +54,19 @@ Settings=Settings
 SettingsLabel=Farm bot settings
 SoilHumidity=Soil humidity	
 Update=Update
+UpdatePlant=UpdatePlant
 UpdateParameters=Update parameters
 Username=Username
 Value=Value
 WaterQuantity=Water quantity
 IpCameraAddress=IP Camera address
 SettingsUpdated=Settings was updated successfully
+FarmBotParameters=FarmBot parameters
+SeededPlantsList = Seeded plants list
+NoInfo=No additional info
 
 #Controls
+#=======================================
 Back=Back
 Left=Left
 Forward=Forward
@@ -69,3 +74,9 @@ Right=Right
 Home=Home
 Up=Up
 Down=Down
+
+#Measurement units
+#=======================================
+Cm=cm
+DateTime=Date
+Days=Days

@@ -40,4 +40,35 @@ namespace Services.ViewModels
 
         #endregion
     }
+
+    public abstract class BaseViewModel<T> : MvxViewModel<T>
+    {
+        public II18N Translate => I18N.Current;
+
+        #region Services
+
+        protected IMvxNavigationService NavigationService { get; }
+
+        protected IUserDialogs UserDialogs { get; set; }
+
+        #endregion
+
+        public BaseViewModel()
+        {
+            // Inject services
+            NavigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
+        }
+
+        #region Methods
+
+        protected void IsBusy(bool state = true)
+        {
+            if (state)
+                UserDialogs.ShowLoading(I18N.Current["LoadingMessage"], MaskType.Gradient);
+            else
+                UserDialogs.HideLoading();
+        }
+
+        #endregion
+    }
 }

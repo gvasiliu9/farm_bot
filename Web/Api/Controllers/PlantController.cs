@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Api.SignalR;
 using Data;
 using Data.Services;
-using Entites;
+using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -108,6 +108,8 @@ namespace Api.Controllers
                 plantToUpdate.Name = plant.Name;
                 plantToUpdate.Info = plant.Info;
                 plantToUpdate.RowDistance = plant.RowDistance;
+                plantToUpdate.PlantDistance = plant.PlantDistance;
+                plantToUpdate.SoilHumidity = plant.SoilHumidity;
                 plantToUpdate.SeedDepth = plant.SeedDepth;
                 plantToUpdate.Duration = plant.Duration;
                 plantToUpdate.Updated = DateTime.Now;

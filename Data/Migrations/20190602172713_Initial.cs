@@ -85,32 +85,40 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Settings",
+                name: "FarmBotPlants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
-                    Updated = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
                     FarmBotId = table.Column<Guid>(nullable: false),
                     PlantId = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
+                    Created = table.Column<DateTime>(nullable: false),
+                    Updated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
+                    table.PrimaryKey("PK_FarmBotPlants", x => new { x.FarmBotId, x.PlantId });
                     table.ForeignKey(
-                        name: "FK_Settings_FarmBots_FarmBotId",
+                        name: "FK_FarmBotPlants_FarmBots_FarmBotId",
                         column: x => x.FarmBotId,
                         principalTable: "FarmBots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Settings_Plants_PlantId",
+                        name: "FK_FarmBotPlants_Plants_PlantId",
                         column: x => x.PlantId,
                         principalTable: "Plants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "FarmBots",
+                columns: new[] { "Id", "IpAddress", "IpCameraAddress", "LastX", "LastY", "Length", "Name", "Width" },
+                values: new object[] { new Guid("99d9742b-1ee2-45c9-a9fb-8742baa3bb86"), "192.168.1.112", "http://192.168.1.1:8080/video", 0, 0, 0, "Utm FarmBot", 0 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FarmBotPlants_PlantId",
+                table: "FarmBotPlants",
+                column: "PlantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FarmBots_Name",
@@ -129,22 +137,6 @@ namespace Data.Migrations
                 table: "Plants",
                 column: "Name",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_FarmBotId",
-                table: "Settings",
-                column: "FarmBotId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_PlantId",
-                table: "Settings",
-                column: "PlantId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_UserId",
-                table: "Settings",
-                column: "UserId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -153,16 +145,16 @@ namespace Data.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
+                name: "FarmBotPlants");
+
+            migrationBuilder.DropTable(
                 name: "Parameters");
 
             migrationBuilder.DropTable(
-                name: "Settings");
+                name: "Plants");
 
             migrationBuilder.DropTable(
                 name: "FarmBots");
-
-            migrationBuilder.DropTable(
-                name: "Plants");
         }
     }
 }

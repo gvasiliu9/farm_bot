@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:renderers="clr-namespace:Mobile.Shared.Renderers"
-             xmlns:i18n="clr-namespace:Mobile.Shared.Extensions"
-             BackgroundColor="{StaticResource ColorPrimary}"
-             x:Class="Mobile.Shared.Pages.LoginPage">
-    
+<views:MvxContentPage
+    x:TypeArguments="viewModels:LoginViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Services.ViewModels;assembly=Services"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Mobile.Shared.Helpers"
+    xmlns:controls="clr-namespace:Mobile.Shared.Pages.Controls"
+    xmlns:renderers="clr-namespace:Mobile.Shared.Renderers"
+    BackgroundColor="{StaticResource ColorPrimary}"
+    x:Class="Mobile.Shared.Pages.LoginPage">
+
     <!--Styles-->
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,34 +22,69 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <!--Controls-->
     <ContentPage.Content>
         <StackLayout Padding="25, 50">
             <Image Source="logo.png"/>
             <StackLayout Spacing="10" Margin="0, 20">
                 <!--Entries-->
-                <Label Margin="0, 0, 0, 2" FontSize="Medium" TextColor="White" FontAttributes="None" Text="{i18n:Translate Key=PleaseLogin}"></Label>
-                <renderers:CustomEntry x:Name="usernameEntry" Text="{Binding Username}" Placeholder="{i18n:Translate Key=Username}" Style="{StaticResource LoginInputStyle}"></renderers:CustomEntry>
-                <renderers:CustomEntry x:Name="passwordEntry" Text="{Binding Password}" IsPassword="True" Placeholder="{i18n:Translate Key=Password}" Style="{StaticResource LoginInputStyle}"></renderers:CustomEntry>
+                <Label
+                    Margin="0, 0, 0, 2"
+                    FontSize="Medium" 
+                    TextColor="White" 
+                    FontAttributes="None"
+                    mvx:Bi.nd="Text Translate[PleaseLogin]"/>
+
+                <renderers:CustomEntry 
+                    x:Name="usernameEntry" 
+                    mvx:Bi.nd="Text Username, Mode=TwoWay; Placeholder Translate[Username]" 
+                    Style="{StaticResource LoginInputStyle}"/>
+
+                <renderers:CustomEntry
+                    x:Name="passwordEntry" 
+                    IsPassword="True" 
+                    mvx:Bi.nd="Text Password, Mode=TwoWay; Placeholder Translate[Password]" 
+                    Style="{StaticResource LoginInputStyle}"/>
+
                 <!--Login button-->
-                <Button x:Name="loginButton" Style="{StaticResource SuccessButton}" Command="{Binding LoginCommand}" Text="{i18n:Translate Key=Login}">
+                <Button 
+                    x:Name="loginButton"
+                    Style="{StaticResource SuccessButton}" 
+                    Command="{Binding LoginCommand}" 
+                    mvx:Bi.nd="Text Translate[Login]">
                     <Button.Triggers>
                         <MultiTrigger TargetType="Button">
                             <MultiTrigger.Conditions>
-                                <BindingCondition Binding="{Binding Source={x:Reference usernameEntry}, Path=Text.Length}"/>
-                                <BindingCondition Binding="{Binding Source={x:Reference passwordEntry}, Path=Text.Length}"/>
+                                <BindingCondition 
+                                    Binding="{Binding Source={x:Reference usernameEntry}, Path=Text.Length}"/>
+                                <BindingCondition 
+                                    Binding="{Binding Source={x:Reference passwordEntry}, Path=Text.Length}"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="IsEnabled" Value="False"/>
+                            <Setter 
+                                Property="IsEnabled"
+                                Value="False"/>
                         </MultiTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference passwordEntry}, Path=Text.Length}" Value="0">
-                            <Setter Property="IsEnabled" Value="False" />
+                        <DataTrigger 
+                            TargetType="Button" 
+                            Binding="{Binding Source={x:Reference passwordEntry}, Path=Text.Length}" 
+                            Value="0">
+                            <Setter 
+                                Property="IsEnabled" 
+                                Value="False" />
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
+
                 <!--Copyright-->
-                <Label Margin="0, 5, 0, 0" FontAttributes="Italic" TextColor="#6aa975" FontSize="10" Text="{i18n:Translate Key=CopyRight}"></Label>
+                <Label 
+                    Margin="0, 5, 0, 0" 
+                    FontAttributes="Italic" 
+                    TextColor="#6aa975" 
+                    FontSize="10" 
+                    mvx:Bi.nd="Text Translate[CopyRight]"/>
+
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</views:MvxContentPage>

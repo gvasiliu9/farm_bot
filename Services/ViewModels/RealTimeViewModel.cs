@@ -1,5 +1,5 @@
 ﻿using Acr.UserDialogs;
-using Entites;
+using Entities;
 using Microsoft.AspNetCore.SignalR.Client;
 using MvvmCross.Commands;
 using Services.Abstractions;

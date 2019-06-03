@@ -16,17 +16,24 @@
         <ContentView ControlTemplate="{StaticResource defaultTemplate}">
             <StackLayout Spacing="10">
                 <!--Total plants label-->
-                <controls:Label Icon="{x:Static helpers:Icons.list}" mvx:Bi.nd="Text Translate[PlantsListLabel]; Count Count"/>
-                <Label mvx:Bi.nd="Text Translate[PlantsListMessage]"/>
+                <controls:Label 
+                    Icon="{x:Static helpers:Icons.list}"
+                    mvx:Bi.nd="Text Translate[PlantsListLabel]; Count Count"/>
+                <Label 
+                    mvx:Bi.nd="Text Translate[PlantsListMessage]"/>
 
                 <!--Add plant link-->
-                <navigationControls:LinkButton mvx:Bi.nd="Text Translate[AddPlant]; Command AddPlantCommand"/>
+                <navigationControls:LinkButton 
+                    mvx:Bi.nd="Text Translate[AddPlant]; Command AddPlantCommand"/>
 
                 <!--Select plant link-->
-                <navigationControls:LinkButton mvx:Bi.nd="Text Translate[SelectPlant]; Command SelectPlantCommand"/>
+                <navigationControls:LinkButton
+                    mvx:Bi.nd="Text Translate[SelectPlant]; Command SelectPlantCommand"/>
                 
                 <!--Image-->
-                <Image Source="agriculture.png" Style="{StaticResource pageImage}"/>
+                <Image 
+                    Source="agriculture.png"
+                    Style="{StaticResource pageImage}"/>
 
             </StackLayout>
         </ContentView>

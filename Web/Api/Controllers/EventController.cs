@@ -1,6 +1,6 @@
 ﻿using Data;
 using Data.Services;
-using Entites;
+using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

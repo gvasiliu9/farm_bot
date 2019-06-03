@@ -12,6 +12,7 @@ using MvvmCross.Forms.Platforms.Android.Core;
 using Services;
 using Acr.UserDialogs;
 using Xamarin.Forms.OpenTok.Android.Service;
+using Xamarin.Forms;
 
 namespace Mobile.Android
 {
@@ -28,6 +29,8 @@ namespace Mobile.Android
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            Forms.SetFlags("CollectionView_Experimental");
 
             base.OnCreate(savedInstanceState);
 

@@ -1,5 +1,5 @@
 ﻿using Acr.UserDialogs;
-using Entites;
+using Entities;
 using I18NPortable;
 using MvvmCross.Commands;
 using Services.Abstractions;

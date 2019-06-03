@@ -1,11 +1,14 @@
 ﻿using Acr.UserDialogs;
-using Entites;
+using Entities;
 using Microsoft.AspNetCore.SignalR;
 using MvvmCross.Commands;
+using MvvmCross.ViewModels;
 using Services.Abstractions;
 using Services.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,16 +28,6 @@ namespace Services.ViewModels
             }
         }
 
-        private Plant _plant;
-        public Plant Plant
-        {
-            get => _plant;
-            set
-            {
-                SetProperty(ref _plant, value);
-            }
-        }
-
         private FarmBot _farmBot;
         public FarmBot FarmBot
         {
@@ -45,31 +38,31 @@ namespace Services.ViewModels
             }
         }
 
-        private int _remainingTime;
-        public int RemainingTime
+
+        private Plant _selectedItem;
+
+        public Plant SelectedItem
         {
-            get => _remainingTime;
+            get => _selectedItem;
             set
             {
-                SetProperty(ref _remainingTime, value);
+                SetProperty(ref _selectedItem, value);
+
+                if (_selectedItem == null)
+                    return;
+
+                Task.Run(async () => await UpdateParameters());
             }
         }
 
-        private string _seedingDate;
-        public string SeedingDate
-        {
-            get => _seedingDate;
-            set
-            {
-                SetProperty(ref _seedingDate, value);
-            }
-        }
+        public ObservableCollection<Plant> Plants { get; }
+            = new ObservableCollection<Plant>();
 
         #endregion
 
         #region Commands
 
-        public IMvxCommand UpdateCommand { get; }
+        public IMvxAsyncCommand<object> SelectionChangedCommand { get; set; }
 
         #endregion
 
@@ -79,34 +72,35 @@ namespace Services.ViewModels
 
         private IFarmBotService _farmBotService;
 
-        private IPlantService _plantService;
+        private IFarmBotPlantsService _farmBotPlantsService;
 
-        private ISettingsService _settingsService;
+        private IPlantService _plantService;
 
         #endregion
 
         public ParametersViewModel(IFarmBotService farmBotService
-            , ISettingsService settingsService
             , IPlantService plantService
+            , IFarmBotPlantsService farmBotPlantsService
             , IParametersService parametersService
             , IUserDialogs userDialogs)
         {
             _farmBotService = farmBotService;
-            _settingsService = settingsService;
+            _farmBotPlantsService = farmBotPlantsService;
             _plantService = plantService;
             _parametersService = parametersService;
 
             UserDialogs = userDialogs;
 
-            // Update parameters command
-            UpdateCommand = new MvxAsyncCommand(async () => {
+            // Init commands
+            SelectionChangedCommand = new MvxAsyncCommand<object>(async (parameter) => {
+                Plant plant = parameter as Plant;
 
+                int i = 0;
             });
         }
 
         public override async Task Initialize()
         {
-            await base.Initialize();
 
             IsBusy();
 
@@ -120,25 +114,26 @@ namespace Services.ViewModels
                 Parameters = await _parametersService
                     .GetByIdAsync(FarmBot.Id);
 
-                // Get farmbot settings
-                Settings farmBotSettings = await _settingsService
-                    .GetByIdAsync(TempData.FarmBotId);
+                // Get farmbot plants
+                var farmBotPlants = await _farmBotPlantsService.GetAllAsync();
 
-                // Get plant
-                Plant = await _plantService.GetByIdAsync(farmBotSettings.PlantId);
-
-                // Convert seeding date to string
-                SeedingDate = Plant.Created.ToShortDateString();
-
-                // Calc remaining time
-                RemainingTime = (DateTime.Now - Plant.Created).Days;
+                if (farmBotPlants.Any())
+                    foreach (var farmbotplant in farmBotPlants)
+                        Plants.Add(await _plantService.GetByIdAsync(farmbotplant.PlantId));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 UserDialogs.Toast(ex.Message);
             }
 
             IsBusy(false);
+
+            await base.Initialize();
+        }
+
+        private async Task UpdateParameters()
+        {
+            await NavigationService.Navigate<UpdateParameteresViewModel, Plant>(SelectedItem);
         }
     }
 }

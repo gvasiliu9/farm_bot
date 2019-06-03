@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MvvmCross.Forms.Views;
+using Services.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,15 +12,13 @@ using Xamarin.Forms.Xaml;
 namespace Mobile.Shared.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UpdateParametersPage : ContentPage
+	public partial class UpdateParametersPage : MvxContentPage<UpdateParameteresViewModel>
 	{
-		public UpdateParametersPage ()
+		public UpdateParametersPage()
 		{
             NavigationPage.SetHasNavigationBar(this, false);
 
-            InitializeComponent ();
-
-            Title = AppResources.UpdateParameters;
-		}
+            InitializeComponent();
+        }
 	}
 }

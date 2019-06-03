@@ -51,6 +51,15 @@ namespace Services.ViewModels
 
         #region Methods
 
+        public override async Task Initialize()
+        {
+            await base.Initialize();
+
+            var plants = await _plantService.GetAllAsync();
+
+            Count = "" + plants.Count();
+        }
+
         #region Events
 
         private async Task AddPlant()

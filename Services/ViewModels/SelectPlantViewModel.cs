@@ -1,5 +1,5 @@
 ﻿using Acr.UserDialogs;
-using Entites;
+using Entities;
 using I18NPortable;
 using Microsoft.AspNetCore.SignalR.Client;
 using MvvmCross.Commands;
@@ -21,6 +21,8 @@ namespace Services.ViewModels
         #region Fields
 
         private HubConnection _communicationHubConnection;
+
+        private int _totalForSeeding;
 
         #endregion
 
@@ -49,18 +51,20 @@ namespace Services.ViewModels
 
         #region Services
 
-        private readonly ISettingsService _settingService;
-
         private readonly IPlantService _plantService;
+
+        private readonly IFarmBotPlantsService _farmBotPlantsService;
 
         #endregion
 
         public SelectPlantViewModel(IPlantService plantService
-            , ISettingsService settingsService, IUserDialogs userDialogs)
+            , IUserDialogs userDialogs
+            , IFarmBotPlantsService farmBotPlantsService)
         {
             // Services
-            _settingService = settingsService;
             _plantService = plantService;
+
+            _farmBotPlantsService = farmBotPlantsService;
 
             UserDialogs = userDialogs;
         }
@@ -94,18 +98,21 @@ namespace Services.ViewModels
 
         private void ItemSelected()
         {
-            UserDialogs.Confirm(new ConfirmConfig
-            {
-                Title = I18N.Current["Confirmation"],
-                Message = I18N.Current["StartProcessQuestion"],
-                OkText = I18N.Current["Start"],
-                CancelText = I18N.Current["Cancel"],
-                OnAction = async (isConfirmed) =>
-                {
-                    if (isConfirmed)
-                        await Apply();
-                }
-            });
+            var count = UserDialogs.Prompt(new PromptConfig {
+                 InputType = InputType.Number,
+                  Message = "Enter number of plants to seed:",
+                  OkText = I18N.Current["Start"],
+                  CancelText = I18N.Current["Cancel"],
+                  Title = I18N.Current["Confirmation"],
+                  OnAction = async (PromptResult) => {
+
+                      // Parse number
+                      _totalForSeeding = int.Parse(PromptResult.Text);
+
+                      // Start new seeding
+                      await Apply();
+                  }
+            }); 
         }
 
         private async Task Apply()
@@ -114,16 +121,16 @@ namespace Services.ViewModels
 
             try
             {
-                // Update settings
-                Settings farmBotSettings = await _settingService
-                    .GetByIdAsync(TempData.FarmBotId);
+                var farmBotPlant = new FarmBotPlant
+                {
+                    FarmBotId = TempData.FarmBotId,
+                    PlantId = SelectedItem.Id,
+                };
 
-                farmBotSettings.PlantId = SelectedItem.Id;
-
-                await _settingService.UpdateAsync(farmBotSettings);
+                await _farmBotPlantsService.AddAsync(farmBotPlant);
 
                 // Start seeding process
-                await _communicationHubConnection.InvokeAsync("Seeding", SelectedItem);
+                await _communicationHubConnection.InvokeAsync("Seeding", SelectedItem, _totalForSeeding);
 
                 // Result
                 UserDialogs.Toast(I18N.Current["ProcessIsStarted"]);

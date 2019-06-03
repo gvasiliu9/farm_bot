@@ -4,6 +4,7 @@
              xmlns:navigationControls="clr-namespace:Mobile.Shared.Pages.Controls.Navigation"
              x:Class="Mobile.Shared.App">
     <Application.Resources>
+
         <!--Success button-->
         <Style x:Key="SuccessButton" TargetType="Button">
             <Setter Property="HorizontalOptions" Value="Start"/>
@@ -53,7 +54,39 @@
             <On Platform="Android" Value="icons.ttf#feather-icons" />
             <!--<On Platform="iOS" Value="customfont" />-->
         </OnPlatform>
-        
+
+        <!--Table header-->
+        <Style x:Key="tableHeader" TargetType="Frame">
+            <Setter Property="Padding" Value="10, 5"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorSecondary}"/>
+        </Style>
+        <!--Table cell-->
+        <Style x:Key="tableCell" TargetType="Frame">
+            <Setter Property="Padding" Value="10, 5"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}"/>
+        </Style>
+        <!--Table header text-->
+        <Style x:Key="tableHeaderText" TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="LineBreakMode" Value="WordWrap"/>
+        </Style>
+        <!--Table cell text-->
+        <Style x:Key="tableCellText" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorDark}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="LineBreakMode" Value="WordWrap"/>
+        </Style>
+
         <!--Template-->
         <ControlTemplate x:Key="defaultTemplate">
             <Grid RowSpacing="0" BackgroundColor="{StaticResource ColorLight}">

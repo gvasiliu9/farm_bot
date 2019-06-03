@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using static Entites.Enums;
+using static Entities.Enums;
 
-namespace Entites
+namespace Entities
 {
     public class Event : BaseEntity
     {

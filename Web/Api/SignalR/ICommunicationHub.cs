@@ -1,4 +1,4 @@
-﻿using Entites;
+﻿using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Api.SignalR
     {
         Task RemoteControl(string direction);
 
-        Task Seeding(Plant plant);
+        Task Seeding(Plant plant, int count);
 
         Task Message(string message);
     }
