@@ -74,13 +74,13 @@ namespace Api.Controllers
 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult Put([FromBody] Parameters CurrentParameters)
+        public ActionResult Put([FromBody] Parameters currentParameters)
         {
             try
             {
                 // Get CurrentParameters
                 Parameters parametersToUpdate = _parametersRepository
-                    .GetById(CurrentParameters.FarmBotId);
+                    .FirstOrDefault(p => p.FarmBotId == currentParameters.FarmBotId);
 
                 // Check
                 if (parametersToUpdate == null)
@@ -90,11 +90,11 @@ namespace Api.Controllers
                     return BadRequest(ModelState);
 
                 // Update
-                parametersToUpdate.AirTemperature = parametersToUpdate.AirTemperature;
-                parametersToUpdate.FarmBotId = parametersToUpdate.FarmBotId;
-                parametersToUpdate.Luminosity = parametersToUpdate.Luminosity;
-                parametersToUpdate.SoilHumidity = parametersToUpdate.SoilHumidity;
-                parametersToUpdate.SeededPlants = parametersToUpdate.SeededPlants;
+                parametersToUpdate.AirTemperature = currentParameters.AirTemperature;
+                parametersToUpdate.FarmBotId = currentParameters.FarmBotId;
+                parametersToUpdate.Luminosity = currentParameters.Luminosity;
+                parametersToUpdate.SoilHumidity = currentParameters.SoilHumidity;
+                parametersToUpdate.SeededPlants = currentParameters.SeededPlants;
                 parametersToUpdate.Updated = DateTime.Now;
 
                 // Save
@@ -115,7 +115,8 @@ namespace Api.Controllers
             try
             {
                 // Get CurrentParameters
-                Parameters parametersToRemove = _parametersRepository.FirstOrDefault(p => p.FarmBotId == id);
+                Parameters parametersToRemove = 
+                    _parametersRepository.FirstOrDefault(p => p.FarmBotId == id);
 
                 // Check
                 if (parametersToRemove == null)

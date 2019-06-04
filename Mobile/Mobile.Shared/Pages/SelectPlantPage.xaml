@@ -14,7 +14,12 @@
             <ListView mvx:Bi.nd="ItemsSource Plants; SelectedItem SelectedItem">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}"/>
+                        <TextCell Text="{Binding Name}">
+                            <TextCell.ContextActions>
+                                <MenuItem Clicked="Delete_Clicked" CommandParameter="{Binding .}"
+                                    Text="Delete" IsDestructive="false" />
+                            </TextCell.ContextActions>
+                        </TextCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -100,17 +100,22 @@ namespace Services.ViewModels
         {
             var count = UserDialogs.Prompt(new PromptConfig {
                  InputType = InputType.Number,
-                  Message = "Enter number of plants to seed:",
+                  Message = "EnterPlantsNumber".Translate(),
                   OkText = I18N.Current["Start"],
                   CancelText = I18N.Current["Cancel"],
                   Title = I18N.Current["Confirmation"],
                   OnAction = async (PromptResult) => {
 
+                      int number = 0;
+
                       // Parse number
-                      _totalForSeeding = int.Parse(PromptResult.Text);
+                      int.TryParse(PromptResult.Text, out number);
+
+                      _totalForSeeding = number;
 
                       // Start new seeding
-                      await Apply();
+                      if(number > 0)
+                        await Apply();
                   }
             }); 
         }
@@ -138,6 +143,24 @@ namespace Services.ViewModels
                 await NavigationService.Close(this);
             }
             catch(Exception ex)
+            {
+                UserDialogs.Toast(ex.Message);
+            }
+
+            IsBusy(false);
+        }
+
+        public async Task Delete(Plant plant)
+        {
+            IsBusy();
+
+            try
+            {
+                await _plantService.DeleteAsync(plant.Id);
+
+                await NavigationService.Close(this);
+            }
+            catch (Exception ex)
             {
                 UserDialogs.Toast(ex.Message);
             }

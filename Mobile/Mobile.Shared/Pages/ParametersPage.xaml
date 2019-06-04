@@ -166,7 +166,20 @@
                     <controls:Label 
                         Icon="{x:Static helpers:Icons.upload_cloud}"
                         mvx:Bi.nd="Text Translate[AdditionalInfo]"/>
-                    <!--Farm Bot Ip-->
+                    <!--FarmBot Name-->
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    mvx:Bi.nd="Text Translate[FarmBotName]"/>
+                                <Span 
+                                    Text=" - "/>
+                                <Span 
+                                    mvx:Bi.nd="Text FarmBot.Name"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <!--FarmBot Ip-->
                     <Label>
                         <Label.FormattedText>
                             <FormattedString>
@@ -208,7 +221,11 @@
                 </StackLayout>
                 
                 <!--Seeded plants-->
-                <StackLayout Spacing="5">
+                <StackLayout
+                    x:Name="seededPlantsContainer"
+                    Spacing="5" 
+                    IsVisible="{Binding HasSeededPlants}">
+                    
                     <controls:Label 
                         Icon="{x:Static helpers:Icons.bar_chart_2}" 
                         mvx:Bi.nd="Text Translate[SeededPlantsList]"/>
@@ -235,6 +252,25 @@
                     </ListView>
                     
                 </StackLayout>
+                
+                <!--No seeded plants image-->
+                <StackLayout 
+                    IsVisible="False">
+                    <StackLayout.Triggers>
+                        <DataTrigger 
+                            TargetType="StackLayout" 
+                            Binding="{Binding Source={x:Reference seededPlantsContainer}, Path=IsVisible}"
+                            Value="False">
+
+                            <Setter Property="IsVisible" Value="True"/>
+
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    
+                    <Image Style="{StaticResource pageImage}" 
+                           Source="plant_on_hand.png"/>
+                </StackLayout>
+                
             </StackLayout>
         </ContentView>
     </ContentPage.Content>

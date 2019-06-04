@@ -37,7 +37,7 @@ namespace Services.ViewModels
             // Redirect to plants page
             ToPlantsCommand = new MvxCommand(async () =>
             {
-                await NavigationService.Navigate<AddPlantViewModel>();
+                await NavigationService.Navigate<PlantsListViewModel>();
             });
 
             // Redirect to video & controll page
@@ -46,10 +46,10 @@ namespace Services.ViewModels
                 await NavigationService.Navigate<RealtimeViewModel>();
             });
 
-            // Redirect to video & controll page
+            // Redirect to settings
             ToSettingsCommand = new MvxCommand(async () =>
             {
-                await NavigationService.Navigate<AddPlantViewModel>();
+                await NavigationService.Navigate<SettingsViewModel>();
             });
         }
     }

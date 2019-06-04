@@ -38,9 +38,7 @@ namespace Services.ViewModels
             }
         }
 
-
         private Plant _selectedItem;
-
         public Plant SelectedItem
         {
             get => _selectedItem;
@@ -58,11 +56,15 @@ namespace Services.ViewModels
         public ObservableCollection<Plant> Plants { get; }
             = new ObservableCollection<Plant>();
 
-        #endregion
-
-        #region Commands
-
-        public IMvxAsyncCommand<object> SelectionChangedCommand { get; set; }
+        private bool _hasSeededPlants;
+        public bool HasSeededPlants
+        {
+            get => _hasSeededPlants;
+            set
+            {
+                SetProperty(ref _hasSeededPlants, value);
+            }
+        }
 
         #endregion
 
@@ -90,13 +92,6 @@ namespace Services.ViewModels
             _parametersService = parametersService;
 
             UserDialogs = userDialogs;
-
-            // Init commands
-            SelectionChangedCommand = new MvxAsyncCommand<object>(async (parameter) => {
-                Plant plant = parameter as Plant;
-
-                int i = 0;
-            });
         }
 
         public override async Task Initialize()
@@ -120,6 +115,9 @@ namespace Services.ViewModels
                 if (farmBotPlants.Any())
                     foreach (var farmbotplant in farmBotPlants)
                         Plants.Add(await _plantService.GetByIdAsync(farmbotplant.PlantId));
+
+                // Checkc if has seeded plants
+                HasSeededPlants = Plants.Any();
             }
             catch (Exception ex)
             {

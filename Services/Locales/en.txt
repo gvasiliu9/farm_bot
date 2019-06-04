@@ -64,6 +64,8 @@ SettingsUpdated=Settings was updated successfully
 FarmBotParameters=FarmBot parameters
 SeededPlantsList = Seeded plants list
 NoInfo=No additional info
+NoSeededPlants=No seeded plants
+EnterPlantsNumber=Enter number of plants to seed:
 
 #Controls
 #=======================================

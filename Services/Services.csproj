@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <None Remove="Locales\en.txt" />
+    <None Remove="Locales\ro.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Locales\ro.txt" />
     <EmbeddedResource Include="Locales\en.txt" />
   </ItemGroup>
 

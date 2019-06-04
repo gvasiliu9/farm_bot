@@ -1,4 +1,5 @@
-﻿using MvvmCross.Forms.Views;
+﻿using Entities;
+using MvvmCross.Forms.Views;
 using Services.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,12 @@ namespace Mobile.Shared.Pages
 
             InitializeComponent();
 		}
-	}
+
+        private async void Delete_Clicked(object sender, EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+
+            await ViewModel.Delete(menuItem.CommandParameter as Plant);
+        }
+    }
 }

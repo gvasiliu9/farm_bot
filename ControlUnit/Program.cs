@@ -1,4 +1,4 @@
-﻿using Entites;
+﻿using Entities;
 using Microsoft.AspNetCore.SignalR.Client;
 using Services;
 using Services.Helpers;
@@ -36,9 +36,13 @@ namespace ControlUnit
 
         private static bool _isFull;
 
-        private static FarmBot _farmBot; 
+        private static FarmBot _farmBot;
+
+        private static Parameters _parameters;
 
         private static FarmBotService _farmBotService;
+
+        private static ParametersService _parametersService;
 
         private enum SerialPortMessage
         {
@@ -76,18 +80,36 @@ namespace ControlUnit
             _YPort.StopBits = StopBits.One;
             _YPort.ReadTimeout = 60000;
 
+            // Get comport names
+            Console.WriteLine("Enter X motors com port name (ex: COM4):");
+
+            _XPort.PortName = Console.ReadLine();
+
+            // Get comport names
+            Console.WriteLine("Enter Y, Z motors com port name (ex: COM4):");
+
+            _YPort.PortName = Console.ReadLine();
+
+            // Message
+
             // Open ports
-            _XPort.Open();
-            _YPort.Open();
+            //_XPort.Open();
+            //_YPort.Open();
+
+            Console.WriteLine("OK....");
 
             // Connect
             Task.Run(Connect);
 
             // Get current parameters
             _farmBotService = new FarmBotService();
+            _parametersService = new ParametersService();
 
             // Get farm bot
             Task.Run(GetFarmBot);
+
+            // Get parameters
+            Task.Run(GetParameters);
 
             // End
             Console.ReadLine();
@@ -111,6 +133,19 @@ namespace ControlUnit
             }
         }
 
+        private static async Task GetParameters()
+        {
+            try
+            {
+                _parameters = await _parametersService
+                    .GetByIdAsync(TempData.FarmBotId);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
         private static async Task Connect()
         {
             // Connect to communication hub
@@ -126,7 +161,7 @@ namespace ControlUnit
                 _communicationHubConnection.On<string>("RemoteControl", RemoteControlCommand);
 
                 // Seeding command
-                _communicationHubConnection.On<Plant>("Seeding", SeedingCommand);
+                _communicationHubConnection.On<Plant, int>("Seeding", SeedingCommand);
             }
             catch (Exception ex)
             {
@@ -271,8 +306,16 @@ namespace ControlUnit
         /// Start plants seeding process
         /// </summary>
         /// <param name="plant"></param>
-        private static void SeedingCommand(Plant plant)
+        private static async void SeedingCommand(Plant plant, int totalForSeeding)
         {
+            _platsForSeeding = totalForSeeding;
+
+            // Update seeded plants count
+
+            _parameters.SeededPlants += totalForSeeding;
+
+            await _parametersService.UpdateAsync(_parameters);
+
             // Check if is not full
             if (_isFull)
                 return;
@@ -335,17 +378,20 @@ namespace ControlUnit
             }
 
             // Save last position on database
-            Task.Run(async() => {
-                _farmBot.LastX = _lastX;
-                _farmBot.LastY = _lastY;
+            _farmBot.LastX = _lastX;
+            _farmBot.LastY = _lastY;
 
-                await _farmBotService.UpdateAsync(_farmBot);
-            });
+            await _farmBotService.UpdateAsync(_farmBot);
 
             // Reset motors
             Delay(2500);
 
             RemoteControlCommand(Direction.Home);
+
+            // Update seeded plants count
+            _parameters.SeededPlants = _parameters.SeededPlants + _platsForSeeding;
+
+            await _parametersService.UpdateAsync(_parameters);
         }
 
         private static void SeedPlant(int impulsesX, int impulsesY, int impulsesZ, bool isNewRow = false)
