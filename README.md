@@ -8,8 +8,8 @@ requirements:
   1) https://docs.microsoft.com/en-us/xamarin/xamarin-forms/
   2) https://www.mvvmcross.com/
   
-  Linux server
-    dot net SDK
-    SQL server
-    GIT
+  Linux server:
+    1) dot net SDK
+    2) SQL server
+    3) GIT
     
