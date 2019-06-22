@@ -5,4 +5,7 @@ requirements:
   3) POSTMAN
   
   Dependences:
-    
+  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/
+  https://www.mvvmcross.com/
+  
+  
