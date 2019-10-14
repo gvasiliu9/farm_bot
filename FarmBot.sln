@@ -33,6 +33,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Embedded", "Embedded", "{72
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlUnit", "ControlUnit\ControlUnit.csproj", "{42DD3B3A-A933-4B8B-8DEB-AA3777E8EC51}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{51B61CC2-E509-455D-A1C6-54BF66652316}"
+	ProjectSection(SolutionItems) = preProject
+		login.png = login.png
+		splash.png = splash.png
+		add_plant.png = add_plant.png
+		plants_list.png = plants_list.png
+		no_parameters.png = no_parameters.png
+		no_plants.png = no_plants.png
+		update_parameters.png = update_parameters.png
+		status.png = status.png
+		main_menu.png = main_menu.png
+		events.png = events.png
+		settings.png = settings.png
+		video.png = video.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -651,5 +667,11 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54575FF0-0896-490A-97B1-620DC2C39205}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$0.StandardHeader = $2
 	EndGlobalSection
 EndGlobal
