@@ -1,15 +1,6 @@
-# FarmBot
-requirements:
-  1) microsoft visual studio 2017 - IDE
-  2) SQL server management studio 
-  3) POSTMAN
-  
-  Dependences:
-  1) https://docs.microsoft.com/en-us/xamarin/xamarin-forms/
-  2) https://www.mvvmcross.com/
-  
-  Linux server:
-    1) dot net SDK
-    2) SQL server
-    3) GIT
-    
+## Farm from Anywhere
+
+#### The FarmBot web app can be loaded on any computer, tablet, or smartphone with a modern web browser, giving you the power to manage your garden from anywhere at any time.
+
+Using the manual controls, you can move FarmBot and operate its tools and peripherals in real-time. Scare birds away while at work, take photos of your veggies, turn the lights on for a night time harvest, or simply impress your friends and neighbors with a quick demo.
+
